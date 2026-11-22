@@ -31,6 +31,7 @@ export const metadata: Metadata = {
   twitter: seoData.twitter,
   robots: seoData.robots,
   icons: seoData.icons,
+  manifest: "/manifest.webmanifest",
   verification: seoData.verification.google
     ? { google: seoData.verification.google }
     : undefined,

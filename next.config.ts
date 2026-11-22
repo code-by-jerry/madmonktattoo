@@ -51,7 +51,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/(og-image.jpg|apple-touch-icon.png|favicon.svg)",
+        source: "/(og-image.jpg|apple-touch-icon.png|favicon.svg|favicon.ico|favicon-16x16.png|favicon-32x32.png|android-chrome-192x192.png|android-chrome-512x512.png)",
         headers: [
           {
             key: "Cache-Control",

@@ -8,7 +8,7 @@ export default function JsonLd() {
     "@type": "TattooParlor",
     name: "Mad Monk Tattoo Studio",
     url: seoData.domain,
-    logo: `${seoData.domain}/favicon.svg`,
+    logo: `${seoData.domain}/android-chrome-512x512.png`,
     image: `${seoData.domain}/og-image.jpg`,
     description: seoData.description,
     telephone: siteConfig.contact.phone,
