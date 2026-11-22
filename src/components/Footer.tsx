@@ -28,20 +28,20 @@ export default function Footer() {
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
               <Link href="#" className="flex items-center space-x-3 mb-4 group">
-                <div className="relative w-11 h-11 shrink-0 overflow-hidden rounded-full border border-theme-border group-hover:border-blood transition-colors bg-theme-surface">
+                <div className="relative w-12 h-12 shrink-0 transition-transform group-hover:scale-105">
                   <Image
                     src={images.logo.light}
                     alt={images.logo.alt}
                     fill
                     sizes="48px"
-                    className="object-contain p-0.5 dark:hidden"
+                    className="object-contain dark:hidden"
                   />
                   <Image
-                    src={images.logo.dark}
+                    src={images.logo.light}
                     alt={images.logo.alt}
                     fill
                     sizes="48px"
-                    className="object-cover hidden dark:block"
+                    className="object-contain hidden dark:block invert brightness-125"
                   />
                 </div>
                 <div className="flex flex-col items-start">

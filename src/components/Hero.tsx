@@ -8,7 +8,7 @@ import { MessageCircle, Calendar, ShieldCheck, ChevronDown } from "lucide-react"
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 sm:pt-36 pb-16">
       {/* Background with Dark Ink Ambience & Placeholder Image */}
       <div className="absolute inset-0 z-0">
         <Image

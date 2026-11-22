@@ -124,12 +124,9 @@ export const siteConfig = {
   },
 
   navLinks: [
+    { label: "Home", href: "#" },
     { label: "Work", href: "#work" },
-    { label: "Styles", href: "#styles" },
-    { label: "Artist", href: "#artist" },
-    { label: "Process", href: "#process" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Contact", href: "#booking" },
   ] as NavLink[],
 
   styles: [
