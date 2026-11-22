@@ -97,9 +97,14 @@ export default function Footer() {
 
           {/* Studio Details & Timings (3 cols) */}
           <div className="lg:col-span-3 space-y-4">
-            <h4 className="text-xs font-mono uppercase tracking-[0.25em] text-blood mb-4">
-              Studios & Contact
-            </h4>
+            <div>
+              <span className="text-xs font-mono uppercase tracking-[0.25em] text-blood block mb-1">
+                // SANCTUARY
+              </span>
+              <h2 className="font-display text-xl sm:text-2xl font-bold text-theme-text-primary">
+                Visit Our Studio
+              </h2>
+            </div>
 
             {/* Two Studio Addresses */}
             <div className="space-y-3">

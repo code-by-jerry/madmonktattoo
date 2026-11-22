@@ -59,7 +59,7 @@ export default function Artist() {
             </div>
             
             <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-theme-text-primary">
-              The Monk Behind The Needle
+              Meet Midnight, Your Tattoo Artist
             </h2>
 
             <div className="mt-6 space-y-4 text-theme-text-secondary text-sm sm:text-base leading-relaxed font-light">

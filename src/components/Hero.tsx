@@ -54,13 +54,18 @@ export default function Hero() {
             <span>Malumichampatti, Coimbatore &amp; Palangarai, Avinashi</span>
           </div>
 
-          {/* Headline */}
+          {/* Headline (Exactly one H1 for page SEO) */}
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white leading-[1.12]">
-            Your Story, <span className="text-blood italic">Inked.</span>
+            Best Tattoo Studio in Coimbatore &amp; Tirupur
           </h1>
 
+          {/* Subline directly under H1 */}
+          <p className="mt-3 text-blood text-sm sm:text-base font-medium tracking-wide">
+            Custom, realistic and portrait tattoos by Midnight.
+          </p>
+
           {/* Subtext */}
-          <p className="mt-4 text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm md:text-[15px] leading-relaxed font-light">
+          <p className="mt-3 text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm md:text-[15px] leading-relaxed font-light">
             {siteConfig.brand.subheadline}
           </p>
 

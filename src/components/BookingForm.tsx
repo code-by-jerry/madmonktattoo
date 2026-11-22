@@ -160,9 +160,9 @@ export default function BookingForm() {
           <div className="inline-flex items-center space-x-2 text-blood text-xs uppercase tracking-[0.3em] font-mono mb-3">
             <span>// 07 INK CONSULTATION</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-theme-text-primary">
+          <h3 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-theme-text-primary">
             Request A Custom Session
-          </h2>
+          </h3>
           <p className="mt-4 text-theme-text-secondary text-sm sm:text-base font-light tracking-wide max-w-xl mx-auto">
             Fill in your details below. Joo reviews every inquiry personally and responds within 24 hours.
           </p>

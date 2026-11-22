@@ -138,9 +138,9 @@ export const siteConfig = {
       "Every piece inked at Mad Monk Tattoo is custom-designed from scratch—never cloned from Pinterest, never repeated. Joo works one-on-one with clients across both our Malumichampatti (Coimbatore) and Palangarai (Avinashi) studios in a quiet, zero-distraction sanctuary where each stroke is deliberate and permanent.",
     ],
     stats: [
-      { label: "Years of Craft", value: "5+ years" },
-      { label: "Custom Tattoos", value: "500+ tattoos" },
-      { label: "Google Rating", value: "4.9 rating" },
+      { label: "Years of Craft", value: "5+ Years" },
+      { label: "Custom Stencils", value: "100% Unique" },
+      { label: "Hygiene Protocol", value: "Clinical" },
     ],
   },
 

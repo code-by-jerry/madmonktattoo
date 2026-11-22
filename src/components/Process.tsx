@@ -21,7 +21,7 @@ export default function Process() {
             <span>// 04 THE JOURNEY</span>
           </div>
           <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-theme-text-primary">
-            The Studio Ritual
+            Our Tattoo Process
           </h2>
           <p className="mt-4 text-theme-text-secondary text-sm sm:text-base font-light tracking-wide">
             Four deliberate stages from your initial concept to permanent, fully-healed sacred art.

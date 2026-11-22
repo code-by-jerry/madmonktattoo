@@ -21,7 +21,7 @@ export default function FAQ() {
             <span>// 08 PROTOCOLS</span>
           </div>
           <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-theme-text-primary">
-            Frequently Asked Questions
+            Tattoo FAQs in Coimbatore &amp; Tirupur
           </h2>
           <p className="mt-4 text-theme-text-secondary text-sm sm:text-base font-light tracking-wide">
             Everything you need to know about preparing for your session, pain management, and ink longevity.

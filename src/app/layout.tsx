@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Cinzel } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/data/site";
+import { seoData } from "@/data/seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
@@ -23,53 +24,17 @@ const cinzel = Cinzel({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.seo.canonicalUrl),
-  title: {
-    default: siteConfig.seo.title,
-    template: `%s | ${siteConfig.brand.name}`,
-  },
-  description: siteConfig.seo.description,
-  keywords: siteConfig.seo.keywords,
-  authors: [{ name: siteConfig.artist.name, url: siteConfig.seo.canonicalUrl }],
-  creator: siteConfig.brand.name,
-  publisher: siteConfig.brand.name,
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_IN",
-    url: siteConfig.seo.canonicalUrl,
-    title: siteConfig.seo.title,
-    description: siteConfig.seo.description,
-    siteName: siteConfig.brand.name,
-    images: [
-      {
-        url: "/images/hero-desktop.webp",
-        width: 1200,
-        height: 630,
-        alt: `${siteConfig.brand.name} - Custom Tattoo Studio`,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.seo.title,
-    description: siteConfig.seo.description,
-    images: ["/images/hero-desktop.webp"],
-    creator: siteConfig.contact.instagram,
-  },
-  icons: {
-    icon: "/favicon.svg",
-  },
+  metadataBase: new URL(seoData.metadataBase),
+  title: seoData.title,
+  description: seoData.description,
+  alternates: seoData.alternates,
+  openGraph: seoData.openGraph,
+  twitter: seoData.twitter,
+  robots: seoData.robots,
+  icons: seoData.icons,
+  verification: seoData.verification.google
+    ? { google: seoData.verification.google }
+    : undefined,
 };
 
 export default function RootLayout({
@@ -82,10 +47,9 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "TattooParlor",
     "name": siteConfig.brand.name,
-    "image": `${siteConfig.seo.canonicalUrl}/images/hero-desktop.webp`,
-    "description": siteConfig.seo.description,
+    "image": `${seoData.domain}/og-image.jpg`,
+    "description": seoData.description,
     "telephone": siteConfig.contact.phone,
-    "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Malumichampatti, Coimbatore & Palangarai, Avinashi",

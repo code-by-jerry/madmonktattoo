@@ -247,10 +247,10 @@ export default function Gallery() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-theme-border pb-8 gap-6">
           <div>
             <div className="inline-flex items-center space-x-2 text-blood text-xs uppercase tracking-[0.3em] font-mono mb-3">
-              <span>// 01 ARCHIVE</span>
+              <span>// 01 PORTFOLIO</span>
             </div>
             <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-theme-text-primary">
-              Selected Work
+              Portrait &amp; Realistic Tattoos
             </h2>
             <p className="mt-3 text-theme-text-secondary text-xs sm:text-sm max-w-xl font-light tracking-wide">
               Every ink mark tells a private ritual. Drag or swipe to explore the collection, and click any piece for full high-resolution details.

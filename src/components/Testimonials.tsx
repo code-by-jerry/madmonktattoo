@@ -29,9 +29,9 @@ export default function Testimonials() {
           <div className="inline-flex items-center space-x-2 text-blood text-xs uppercase tracking-[0.3em] font-mono mb-3">
             <span>// 06 HEALED STORIES</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-theme-text-primary">
+          <h3 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-theme-text-primary">
             Client Testimonials
-          </h2>
+          </h3>
         </div>
 
         {/* Carousel Container */}
@@ -48,13 +48,6 @@ export default function Testimonials() {
                 transition={{ duration: 0.35 }}
                 className="text-center max-w-3xl flex flex-col items-center"
               >
-                {/* 5-Star Rating */}
-                <div className="flex items-center space-x-1 mb-6 text-blood">
-                  {[...Array(current.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-blood text-blood" />
-                  ))}
-                </div>
-
                 {/* Review Text */}
                 <p className="font-serif italic text-lg sm:text-xl md:text-2xl text-theme-text-primary font-light leading-relaxed">
                   &ldquo;{current.quote}&rdquo;

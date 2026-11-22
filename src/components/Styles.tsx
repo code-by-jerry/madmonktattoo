@@ -16,7 +16,7 @@ export default function Styles() {
             <span>// 02 EXPERTISE</span>
           </div>
           <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-theme-text-primary">
-            Tattoo Styles & Disciplines
+            Custom Tattoo Styles
           </h2>
           <p className="mt-4 text-theme-text-secondary text-sm sm:text-base font-light tracking-wide">
             From single-needle delicate sacred scripts to heavy blackwork armor. We specialize in custom compositions tailored to anatomical muscle lines.
