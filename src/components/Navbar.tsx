@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { siteConfig } from "@/data/site";
+import { images } from "@/data/images";
 import { Phone, MessageCircle, Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 
@@ -26,28 +28,50 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-theme-bg/95 backdrop-blur-md border-b border-theme-border py-3 shadow-sm"
-          : "bg-transparent py-5"
+          ? "bg-theme-bg/95 backdrop-blur-md border-b border-theme-border py-2.5 shadow-sm"
+          : "bg-transparent py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo Wordmark: Crisp Black & White with subtle Blood Red diamond accent */}
+          {/* Logo with Light/Dark studio emblem */}
           <Link
             href="#"
-            className="group flex flex-col items-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blood rounded-sm"
+            className="group flex items-center space-x-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blood rounded-sm"
             aria-label={`${siteConfig.brand.name} Home`}
           >
-            <div className="flex items-center space-x-2">
-              <span className="w-2 h-2 bg-blood rotate-45 inline-block group-hover:scale-125 transition-transform" />
-              <span className="font-display font-bold text-xl sm:text-2xl tracking-[0.22em] text-theme-text-primary transition-colors">
-                {siteConfig.brand.wordmarkPrefix}{" "}
-                <span>{siteConfig.brand.wordmarkSuffix}</span>
+            <div className="relative w-10 h-10 sm:w-11 sm:h-11 shrink-0 overflow-hidden rounded-full border border-theme-border group-hover:border-blood transition-colors shadow-sm bg-theme-surface">
+              {/* Light mode logo */}
+              <Image
+                src={images.logo.light}
+                alt={images.logo.alt}
+                fill
+                sizes="48px"
+                priority
+                className="object-contain p-0.5 dark:hidden"
+              />
+              {/* Dark mode logo */}
+              <Image
+                src={images.logo.dark}
+                alt={images.logo.alt}
+                fill
+                sizes="48px"
+                priority
+                className="object-cover hidden dark:block"
+              />
+            </div>
+
+            <div className="flex flex-col items-start">
+              <div className="flex items-center space-x-1.5">
+                <span className="w-1.5 h-1.5 bg-blood rotate-45 inline-block group-hover:scale-125 transition-transform" />
+                <span className="font-display font-bold text-lg sm:text-xl tracking-[0.2em] text-theme-text-primary transition-colors leading-none">
+                  {siteConfig.brand.wordmarkPrefix} {siteConfig.brand.wordmarkSuffix}
+                </span>
+              </div>
+              <span className="text-[9px] tracking-[0.32em] text-theme-text-muted uppercase pl-3 font-mono mt-1">
+                {siteConfig.brand.submark}
               </span>
             </div>
-            <span className="text-[9px] tracking-[0.35em] text-theme-text-muted uppercase pl-4 font-mono">
-              {siteConfig.brand.submark}
-            </span>
           </Link>
 
           {/* Desktop Navigation Links */}

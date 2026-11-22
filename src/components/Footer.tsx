@@ -1,5 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import { siteConfig } from "@/data/site";
+import { images } from "@/data/images";
 import {
   MapPin,
   Clock,
@@ -19,16 +21,34 @@ export default function Footer() {
           {/* Brand & Wordmark (4 cols) */}
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
-              <Link href="#" className="flex flex-col items-start mb-4">
-                <div className="flex items-center space-x-2">
-                  <span className="w-2 h-2 bg-blood rotate-45 inline-block" />
-                  <span className="font-display font-bold text-2xl tracking-[0.22em] text-theme-text-primary">
-                    {siteConfig.brand.wordmarkPrefix} {siteConfig.brand.wordmarkSuffix}
+              <Link href="#" className="flex items-center space-x-3 mb-4 group">
+                <div className="relative w-11 h-11 shrink-0 overflow-hidden rounded-full border border-theme-border group-hover:border-blood transition-colors bg-theme-surface">
+                  <Image
+                    src={images.logo.light}
+                    alt={images.logo.alt}
+                    fill
+                    sizes="48px"
+                    className="object-contain p-0.5 dark:hidden"
+                  />
+                  <Image
+                    src={images.logo.dark}
+                    alt={images.logo.alt}
+                    fill
+                    sizes="48px"
+                    className="object-cover hidden dark:block"
+                  />
+                </div>
+                <div className="flex flex-col items-start">
+                  <div className="flex items-center space-x-1.5">
+                    <span className="w-1.5 h-1.5 bg-blood rotate-45 inline-block" />
+                    <span className="font-display font-bold text-xl sm:text-2xl tracking-[0.22em] text-theme-text-primary">
+                      {siteConfig.brand.wordmarkPrefix} {siteConfig.brand.wordmarkSuffix}
+                    </span>
+                  </div>
+                  <span className="text-[9px] tracking-[0.35em] text-theme-text-muted uppercase pl-3 font-mono">
+                    {siteConfig.brand.submark}
                   </span>
                 </div>
-                <span className="text-[9px] tracking-[0.35em] text-theme-text-muted uppercase pl-4 font-mono">
-                  {siteConfig.brand.submark}
-                </span>
               </Link>
               <p className="text-xs sm:text-sm text-theme-text-secondary font-light leading-relaxed max-w-sm mt-3">
                 Sacred linework, bespoke dark neo-traditional, and anatomical blackwork. Operating by private appointment in Bengaluru, India.

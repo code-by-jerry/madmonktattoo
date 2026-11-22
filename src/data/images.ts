@@ -19,6 +19,13 @@ export interface TattooImage {
 }
 
 export const images = {
+  logo: {
+    light: "/images/logo-light.png",
+    dark: "/images/logo-dark.jpg",
+    alt: "Mad Monk Tattoo Studio Logo",
+    width: 200,
+    height: 200,
+  },
   hero: {
     src: "/placeholders/hero-tattoo.svg",
     alt: "Mad Monk Tattoo Studio - Dark custom ink artwork",
