@@ -27,6 +27,7 @@ const clientBookingSchema = z.object({
   placement: z.string().min(1, "Please select a body placement"),
   size: z.string().min(1, "Please select an approximate size"),
   style: z.string().min(1, "Please select a preferred tattoo style"),
+  preferredStudio: z.string().optional(),
   preferredDate: z.string().optional(),
   website: z.string().max(0).optional(), // honeypot
 });
@@ -74,6 +75,12 @@ const STYLE_OPTIONS = [
   "Undecided / Open to Vikram's recommendation",
 ];
 
+const STUDIO_OPTIONS = [
+  "Coimbatore Studio",
+  "Palangarai, Avinashi Studio",
+  "Either Location (Flexible)",
+];
+
 export default function BookingForm() {
   const [images, setImages] = useState<ImagePreview[]>([]);
   const [imageError, setImageError] = useState<string | null>(null);
@@ -96,6 +103,7 @@ export default function BookingForm() {
       placement: "",
       size: "",
       style: "",
+      preferredStudio: "Coimbatore Studio",
       preferredDate: "",
       website: "",
     },
@@ -281,7 +289,7 @@ export default function BookingForm() {
                 <input
                   id="phone"
                   type="tel"
-                  placeholder="+91 98765 43210"
+                  placeholder="+91 90809 37352"
                   {...register("phone")}
                   className={`w-full px-4 py-3 bg-theme-bg border text-sm text-theme-text-primary placeholder:text-theme-text-muted focus:outline-none focus:border-blood transition-colors ${
                     errors.phone ? "border-blood" : "border-theme-border"
@@ -353,7 +361,7 @@ export default function BookingForm() {
               </div>
             </div>
 
-            {/* Select Row: Style & Preferred Date */}
+            {/* Select Row: Style & Preferred Studio */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Preferred Style */}
               <div>
@@ -382,20 +390,38 @@ export default function BookingForm() {
                 )}
               </div>
 
-              {/* Preferred Date */}
+              {/* Preferred Studio Location */}
               <div>
-                <label htmlFor="preferredDate" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
-                  Preferred Date (Optional)
+                <label htmlFor="preferredStudio" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
+                  Studio Location <span className="text-blood">*</span>
                 </label>
-                <div className="relative">
-                  <input
-                    id="preferredDate"
-                    type="date"
-                    min={new Date().toISOString().split("T")[0]}
-                    {...register("preferredDate")}
-                    className="w-full px-4 py-3 bg-theme-bg border border-theme-border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors"
-                  />
-                </div>
+                <select
+                  id="preferredStudio"
+                  {...register("preferredStudio")}
+                  className="w-full px-4 py-3 bg-theme-bg border border-theme-border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors"
+                >
+                  {STUDIO_OPTIONS.map((opt) => (
+                    <option key={opt} value={opt} className="bg-theme-bg text-theme-text-primary">
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Preferred Date */}
+            <div>
+              <label htmlFor="preferredDate" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
+                Preferred Date (Optional)
+              </label>
+              <div className="relative">
+                <input
+                  id="preferredDate"
+                  type="date"
+                  min={new Date().toISOString().split("T")[0]}
+                  {...register("preferredDate")}
+                  className="w-full px-4 py-3 bg-theme-bg border border-theme-border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors"
+                />
               </div>
             </div>
 

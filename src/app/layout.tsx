@@ -88,16 +88,16 @@ export default function RootLayout({
     "priceRange": "₹₹ - ₹₹₹",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Studio 104, Nirvana Courtyard, 100ft Road, Indiranagar",
-      "addressLocality": "Bengaluru",
-      "addressRegion": "Karnataka",
-      "postalCode": "560038",
+      "streetAddress": "Coimbatore & Palangarai, Avinashi",
+      "addressLocality": "Coimbatore",
+      "addressRegion": "Tamil Nadu",
+      "postalCode": "641001",
       "addressCountry": "IN",
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 12.972778,
-      "longitude": 77.638515,
+      "latitude": 10.902425,
+      "longitude": 76.693668,
     },
     "openingHoursSpecification": [
       {

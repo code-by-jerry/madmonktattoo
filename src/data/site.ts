@@ -37,6 +37,15 @@ export interface Testimonial {
   quote: string;
 }
 
+export interface StudioLocation {
+  id: string;
+  name: string;
+  shortName: string;
+  city: string;
+  address: string;
+  embedUrl: string;
+}
+
 export interface FAQItem {
   id: string;
   question: string;
@@ -51,7 +60,7 @@ export const siteConfig = {
     submark: "CUSTOM TATTOO STUDIO",
     headline: "Your Story, Inked.",
     subheadline:
-      "Sacred linework, dark neo-traditional, and bespoke custom blackwork by appointment in Bengaluru, India. Where raw storytelling meets monastic precision.",
+      "Sacred linework, dark neo-traditional, and bespoke custom blackwork by appointment in Coimbatore & Palangarai (Avinashi), Tamil Nadu. Where raw storytelling meets monastic precision.",
     bookingBadge: "Now Booking • Limited Monthly Sessions",
     trustRow: [
       "Custom designs only",
@@ -62,10 +71,10 @@ export const siteConfig = {
   },
 
   contact: {
-    phone: "+91 98765 43210",
-    phoneClean: "+919876543210",
-    whatsapp: "+919876543210",
-    whatsappDisplay: "+91 98765 43210",
+    phone: "+91 90809 37352",
+    phoneClean: "+919080937352",
+    whatsapp: "+919080937352",
+    whatsappDisplay: "+91 90809 37352",
     whatsappMessage:
       "Hi Mad Monk Tattoo, I would like to inquire about booking a custom tattoo session.",
     get whatsappUrl() {
@@ -76,18 +85,36 @@ export const siteConfig = {
     instagram: "@madmonktattoo",
     instagramUrl: "https://instagram.com/madmonktattoo",
     email: "ink@madmonktattoo.com",
-    address: "Studio 104, Nirvana Courtyard, 100ft Road, Indiranagar, Bengaluru, Karnataka 560038, India",
-    studioTimings: "Tue – Sun: 11:00 AM – 8:00 PM (Mondays Closed / strictly by appointment)",
-    googleMapsEmbedUrl:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.9855523996767!2d77.6385150757962!3d12.972778387342617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae16a792372c05%3A0x6b1d120a1cfcbb02!2sIndiranagar%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin",
+    address: "Coimbatore & Palangarai (Avinashi), Tamil Nadu, India",
+    studioTimings: "Tue – Sun: 11:00 AM – 8:00 PM (Mondays Closed / Strictly By Appointment)",
+    studios: [
+      {
+        id: "coimbatore",
+        name: "Coimbatore Studio",
+        shortName: "Coimbatore",
+        city: "Coimbatore, Tamil Nadu",
+        address: "MAD MONK TATTOO STUDIO, Coimbatore, Tamil Nadu, India",
+        embedUrl:
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d250739.51543493313!2d76.69366836547853!3d10.902424830288496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba85b8fac8737e3%3A0xfa7622728c80d4d9!2sMAD%20MONK%20TATTOO%20STUDIO!5e0!3m2!1sen!2sin!4v1795369828417!5m2!1sen!2sin",
+      },
+      {
+        id: "avinashi",
+        name: "Palangarai, Avinashi Studio",
+        shortName: "Avinashi",
+        city: "Palangarai, Avinashi, Tamil Nadu",
+        address: "MAD MONK TATTOO STUDIO, Palangarai, Avinashi, Tamil Nadu, India",
+        embedUrl:
+          "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3913.994869080696!2d77.27615342504788!3d11.188014988986847!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba903002d58c19b%3A0x5cfd62ebe055cd52!2sMAD%20MONK%20TATTOO%20STUDIO!5e0!3m2!1sen!2sin!4v1795369862153!5m2!1sen!2sin",
+      },
+    ] as StudioLocation[],
   },
 
   artist: {
     name: "Vikram \"Monk\" Dev",
     title: "Founder & Lead Custom Artist",
     bio: [
-      "Trained in classical fine arts before dedicating his life to the ritual needle. Vikram draws inspiration from Tibetan iconography, sacred geometric mandalas, gothic linework, and dark Indian mythology.",
-      "Every piece inked at Mad Monk Tattoo is custom-designed from scratch—never cloned from Pinterest, never repeated. Vikram works one-on-one with clients in a quiet, zero-distraction sanctuary where each stroke is deliberate and permanent.",
+      "Trained in classical fine arts before dedicating his life to the ritual needle. Vikram draws inspiration from sacred geometric mandalas, gothic linework, dark mythology, and ancient iconography.",
+      "Every piece inked at Mad Monk Tattoo is custom-designed from scratch—never cloned from Pinterest, never repeated. Vikram works one-on-one with clients across both our Coimbatore and Palangarai (Avinashi) studios in a quiet, zero-distraction sanctuary where each stroke is deliberate and permanent.",
     ],
     stats: [
       { label: "Years of Craft", value: "5+ years" },
@@ -145,7 +172,7 @@ export const siteConfig = {
     {
       id: "religious-spiritual",
       title: "Religious / Spiritual",
-      description: "Vedic scriptures, Tibetan deities, yantras, and symbolic talismans with spiritual gravity.",
+      description: "Vedic scriptures, deities, yantras, and symbolic talismans with spiritual gravity.",
       imageKey: "styleSpiritual",
     },
     {
@@ -176,7 +203,7 @@ export const siteConfig = {
       title: "The Session",
       subtitle: "Ritual & Precision",
       description:
-        "Inked inside our private, hospital-grade sanitized studio. We use 100% single-use sterile cartridges, vegan ink pigments, and take breaks at your pace with calming soundscapes.",
+        "Inked inside our private, hospital-grade sanitized studio in Coimbatore or Avinashi. We use 100% single-use sterile cartridges, vegan ink pigments, and take breaks at your pace.",
     },
     {
       number: "04",
@@ -250,7 +277,7 @@ export const siteConfig = {
     {
       id: "review-1",
       client: "Kabir S.",
-      location: "Bengaluru",
+      location: "Coimbatore",
       tattooType: "Geometric Mandala Half-Sleeve",
       rating: 5,
       quote:
@@ -259,16 +286,16 @@ export const siteConfig = {
     {
       id: "review-2",
       client: "Ananya R.",
-      location: "Mumbai",
+      location: "Tirupur",
       tattooType: "Fine-Line Spinal Inscription",
       rating: 5,
       quote:
-        "I flew in from Mumbai specifically for Mad Monk's fine line mastery. Zero blowout, zero scarring, and the single-needle work along my spine feels like velvet. Best studio experience in India by a mile.",
+        "Travelled to Mad Monk's Avinashi studio specifically for the fine line mastery. Zero blowout, zero scarring, and the single-needle work along my spine feels like velvet. Best studio experience in Tamil Nadu.",
     },
     {
       id: "review-3",
       client: "Rohan D.",
-      location: "Goa",
+      location: "Coimbatore",
       tattooType: "Blackwork Cover-up",
       rating: 5,
       quote:
@@ -316,18 +343,20 @@ export const siteConfig = {
   ] as FAQItem[],
 
   seo: {
-    title: "Mad Monk Tattoo | Custom Tattoo Studio & Artist in Bengaluru, India",
+    title: "Mad Monk Tattoo | Custom Tattoo Studio in Coimbatore & Avinashi, Tamil Nadu",
     description:
-      "Bespoke custom tattoos, sacred linework, dark geometric mandalas, fine-line and cover-ups by Mad Monk Tattoo in Indiranagar, Bengaluru. Book your private session.",
+      "Bespoke custom tattoos, sacred linework, dark geometric mandalas, fine-line and cover-ups by Mad Monk Tattoo Studio in Coimbatore and Palangarai (Avinashi), Tamil Nadu. Book your private session.",
     keywords: [
-      "Mad Monk Tattoo",
-      "custom tattoo studio Bangalore",
-      "best tattoo artist Bengaluru",
-      "fine line tattoo India",
-      "blackwork tattoo artist",
-      "geometric mandala tattoo",
-      "cover up tattoo specialist India",
-      "private tattoo studio Indiranagar",
+      "Mad Monk Tattoo Studio",
+      "tattoo studio Coimbatore",
+      "best tattoo artist Coimbatore",
+      "tattoo studio Avinashi",
+      "tattoo studio Palangarai",
+      "tattoo studio Tirupur",
+      "fine line tattoo Tamil Nadu",
+      "blackwork tattoo artist India",
+      "geometric mandala tattoo Coimbatore",
+      "cover up tattoo specialist Coimbatore",
     ],
     canonicalUrl: "https://madmonktattoo.com",
   },

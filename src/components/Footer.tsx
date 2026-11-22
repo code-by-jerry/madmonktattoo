@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/data/site";
@@ -13,6 +16,9 @@ import {
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [activeStudioIndex, setActiveStudioIndex] = useState(0);
+
+  const activeStudio = siteConfig.contact.studios[activeStudioIndex];
 
   return (
     <footer className="bg-theme-bg border-t border-theme-border pt-16 pb-12 relative overflow-hidden transition-colors duration-300">
@@ -51,7 +57,7 @@ export default function Footer() {
                 </div>
               </Link>
               <p className="text-xs sm:text-sm text-theme-text-secondary font-light leading-relaxed max-w-sm mt-3">
-                Sacred linework, bespoke dark neo-traditional, and anatomical blackwork. Operating by private appointment in Bengaluru, India.
+                Sacred linework, bespoke dark neo-traditional, and anatomical blackwork. Operating by private appointment across Coimbatore & Palangarai (Avinashi), Tamil Nadu.
               </p>
             </div>
 
@@ -92,24 +98,34 @@ export default function Footer() {
           {/* Studio Details & Timings (3 cols) */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-xs font-mono uppercase tracking-[0.25em] text-blood mb-4">
-              Studio & Hours
+              Studios & Contact
             </h4>
 
-            <div className="flex items-start space-x-3 text-xs text-theme-text-secondary">
-              <MapPin className="w-4 h-4 text-blood shrink-0 mt-0.5" />
-              <span className="leading-relaxed">{siteConfig.contact.address}</span>
+            {/* Two Studio Addresses */}
+            <div className="space-y-3">
+              {siteConfig.contact.studios.map((studio, sIdx) => (
+                <div key={studio.id} className="flex items-start space-x-2.5 text-xs text-theme-text-secondary">
+                  <MapPin className="w-4 h-4 text-blood shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-theme-text-primary block font-mono text-[11px]">
+                      {studio.name}
+                    </span>
+                    <span className="leading-relaxed text-[11px] text-theme-text-muted">{studio.address}</span>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            <div className="flex items-start space-x-3 text-xs text-theme-text-secondary">
+            <div className="flex items-start space-x-3 text-xs text-theme-text-secondary pt-1">
               <Clock className="w-4 h-4 text-blood shrink-0 mt-0.5" />
               <span className="leading-relaxed">{siteConfig.contact.studioTimings}</span>
             </div>
 
-            <div className="flex items-center space-x-3 text-xs text-theme-text-secondary pt-2">
+            <div className="flex items-center space-x-3 text-xs text-theme-text-secondary pt-1">
               <Phone className="w-4 h-4 text-blood shrink-0" />
               <a
                 href={`tel:${siteConfig.contact.phoneClean}`}
-                className="hover:text-blood transition-colors font-mono"
+                className="hover:text-blood transition-colors font-mono font-medium"
               >
                 {siteConfig.contact.phone}
               </a>
@@ -123,31 +139,53 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="hover:text-blood transition-colors font-mono"
               >
-                WhatsApp Direct Inquiries
+                WhatsApp Direct: {siteConfig.contact.phone}
               </a>
             </div>
           </div>
 
-          {/* Google Maps Embed Placeholder (3 cols) */}
+          {/* Dual Studio Google Maps Embed (3 cols) */}
           <div className="lg:col-span-3">
-            <h4 className="text-xs font-mono uppercase tracking-[0.25em] text-blood mb-4">
-              Studio Location
-            </h4>
+            <div className="flex items-center justify-between mb-4">
+              <h4 className="text-xs font-mono uppercase tracking-[0.25em] text-blood">
+                Map View
+              </h4>
+
+              {/* Studio selector tabs */}
+              <div className="flex items-center border border-theme-border p-0.5 bg-theme-surface">
+                {siteConfig.contact.studios.map((studio, idx) => (
+                  <button
+                    key={studio.id}
+                    type="button"
+                    onClick={() => setActiveStudioIndex(idx)}
+                    className={`px-2 py-1 text-[10px] font-mono tracking-wider transition-colors ${
+                      activeStudioIndex === idx
+                        ? "bg-blood text-white font-semibold"
+                        : "text-theme-text-muted hover:text-theme-text-primary"
+                    }`}
+                  >
+                    {studio.shortName}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <div className="relative aspect-video w-full border border-theme-border overflow-hidden bg-theme-card group shadow-sm">
               <iframe
-                title="Mad Monk Tattoo Studio Location Map"
-                src={siteConfig.contact.googleMapsEmbedUrl}
+                key={activeStudio.id}
+                title={`${activeStudio.name} Map Location`}
+                src={activeStudio.embedUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen={false}
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="opacity-80 group-hover:opacity-100 transition-opacity grayscale contrast-125"
+                referrerPolicy="strict-origin-when-cross-origin"
+                className="opacity-90 group-hover:opacity-100 transition-opacity grayscale contrast-125"
               />
-              <div className="absolute bottom-2 left-2 right-2 bg-theme-card/90 backdrop-blur-sm p-1.5 text-[9px] font-mono text-theme-text-muted flex items-center justify-between border border-theme-border">
-                <span>Indiranagar, Bengaluru</span>
-                <span className="text-blood font-semibold">Google Maps</span>
+              <div className="absolute bottom-2 left-2 right-2 bg-theme-card/95 backdrop-blur-sm p-1.5 text-[9px] font-mono text-theme-text-muted flex items-center justify-between border border-theme-border">
+                <span className="font-semibold text-theme-text-primary truncate pr-2">{activeStudio.city}</span>
+                <span className="text-blood font-semibold shrink-0">Google Maps</span>
               </div>
             </div>
           </div>
@@ -157,7 +195,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between text-[11px] text-theme-text-muted font-mono">
           <p>© {currentYear} {siteConfig.brand.name}. All rights reserved.</p>
           <p className="mt-2 sm:mt-0 tracking-wider">
-            Sterile Single-Use Cartridges • 100% Custom Stencils • No Walk-ins
+            Coimbatore & Avinashi • Sterile Single-Use Cartridges • Strictly By Appointment
           </p>
         </div>
       </div>
