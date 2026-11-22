@@ -26,13 +26,13 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-theme-bg/95 backdrop-blur-md border-b border-theme-border py-3 shadow-lg"
+          ? "bg-theme-bg/95 backdrop-blur-md border-b border-theme-border py-3 shadow-sm"
           : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo Wordmark */}
+          {/* Logo Wordmark: Crisp Black & White with subtle Blood Red diamond accent */}
           <Link
             href="#"
             className="group flex flex-col items-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blood rounded-sm"
@@ -40,8 +40,9 @@ export default function Navbar() {
           >
             <div className="flex items-center space-x-2">
               <span className="w-2 h-2 bg-blood rotate-45 inline-block group-hover:scale-125 transition-transform" />
-              <span className="font-display font-bold text-xl sm:text-2xl tracking-[0.22em] text-theme-text-primary group-hover:text-blood transition-colors">
-                {siteConfig.brand.wordmarkPrefix} <span className="text-blood">{siteConfig.brand.wordmarkSuffix}</span>
+              <span className="font-display font-bold text-xl sm:text-2xl tracking-[0.22em] text-theme-text-primary transition-colors">
+                {siteConfig.brand.wordmarkPrefix}{" "}
+                <span>{siteConfig.brand.wordmarkSuffix}</span>
               </span>
             </div>
             <span className="text-[9px] tracking-[0.35em] text-theme-text-muted uppercase pl-4 font-mono">
@@ -71,12 +72,14 @@ export default function Navbar() {
 
             <a
               href={`tel:${siteConfig.contact.phoneClean}`}
-              className="inline-flex items-center space-x-2 px-4 py-2 border border-theme-border rounded-none text-xs uppercase tracking-widest text-theme-text-primary hover:bg-theme-surface hover:border-blood transition-colors"
+              className="inline-flex items-center space-x-2 px-4 py-2 border border-theme-border rounded-none text-xs uppercase tracking-widest text-theme-text-primary hover:bg-theme-surface transition-colors"
               aria-label={`Call ${siteConfig.brand.name} at ${siteConfig.contact.phone}`}
             >
-              <Phone className="w-3.5 h-3.5 text-blood" />
+              <Phone className="w-3.5 h-3.5 text-theme-text-muted" />
               <span>Call</span>
             </a>
+
+            {/* Accent button: Book on WhatsApp in Blood Red */}
             <a
               href={siteConfig.contact.whatsappUrl}
               target="_blank"
@@ -97,7 +100,7 @@ export default function Navbar() {
               className="p-2 border border-theme-border text-theme-text-primary hover:bg-theme-surface rounded-none"
               aria-label="Call studio"
             >
-              <Phone className="w-4 h-4 text-blood" />
+              <Phone className="w-4 h-4 text-theme-text-muted" />
             </a>
             <button
               type="button"
@@ -114,7 +117,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-theme-surface border-b border-theme-border px-6 py-6 space-y-5 animate-in slide-in-from-top-4 duration-200 shadow-2xl">
+        <div className="md:hidden bg-theme-surface border-b border-theme-border px-6 py-6 space-y-5 animate-in slide-in-from-top-4 duration-200 shadow-xl">
           <nav className="flex flex-col space-y-4" aria-label="Mobile Navigation">
             {siteConfig.navLinks.map((link) => (
               <a
@@ -142,7 +145,7 @@ export default function Navbar() {
               href={`tel:${siteConfig.contact.phoneClean}`}
               className="flex items-center justify-center space-x-2 w-full py-3 border border-theme-border text-theme-text-primary text-xs uppercase tracking-widest hover:bg-theme-bg"
             >
-              <Phone className="w-4 h-4 text-blood" />
+              <Phone className="w-4 h-4 text-theme-text-muted" />
               <span>Call {siteConfig.contact.phone}</span>
             </a>
           </div>

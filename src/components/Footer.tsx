@@ -23,8 +23,7 @@ export default function Footer() {
                 <div className="flex items-center space-x-2">
                   <span className="w-2 h-2 bg-blood rotate-45 inline-block" />
                   <span className="font-display font-bold text-2xl tracking-[0.22em] text-theme-text-primary">
-                    {siteConfig.brand.wordmarkPrefix}{" "}
-                    <span className="text-blood">{siteConfig.brand.wordmarkSuffix}</span>
+                    {siteConfig.brand.wordmarkPrefix} {siteConfig.brand.wordmarkSuffix}
                   </span>
                 </div>
                 <span className="text-[9px] tracking-[0.35em] text-theme-text-muted uppercase pl-4 font-mono">
