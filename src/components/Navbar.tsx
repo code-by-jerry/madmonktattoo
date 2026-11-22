@@ -1,0 +1,150 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { siteConfig } from "@/data/site";
+import { Phone, MessageCircle, Menu, X } from "lucide-react";
+
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close mobile menu when anchor link clicked
+  const handleNavClick = () => {
+    setMobileMenuOpen(false);
+  };
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-dark/90 backdrop-blur-md border-b border-ink-paper/10 py-3 shadow-2xl"
+          : "bg-transparent py-5"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          {/* Logo Wordmark */}
+          <Link
+            href="#"
+            className="group flex flex-col items-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blood rounded-sm"
+            aria-label={`${siteConfig.brand.name} Home`}
+          >
+            <div className="flex items-center space-x-2">
+              <span className="w-2 h-2 bg-blood rotate-45 inline-block group-hover:scale-125 transition-transform" />
+              <span className="font-display font-bold text-xl sm:text-2xl tracking-[0.22em] text-ink-paper group-hover:text-white transition-colors">
+                {siteConfig.brand.wordmarkPrefix} <span className="text-blood">{siteConfig.brand.wordmarkSuffix}</span>
+              </span>
+            </div>
+            <span className="text-[9px] tracking-[0.35em] text-ink-muted uppercase pl-4 font-mono">
+              {siteConfig.brand.submark}
+            </span>
+          </Link>
+
+          {/* Desktop Navigation Links */}
+          <nav
+            className="hidden md:flex items-center space-x-8"
+            aria-label="Main Navigation"
+          >
+            {siteConfig.navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-xs uppercase tracking-[0.2em] font-medium text-ink-muted hover:text-ink-paper hover:border-b hover:border-blood py-1 transition-all"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Desktop Action Buttons */}
+          <div className="hidden lg:flex items-center space-x-3">
+            <a
+              href={`tel:${siteConfig.contact.phoneClean}`}
+              className="inline-flex items-center space-x-2 px-4 py-2 border border-ink-paper/20 rounded-none text-xs uppercase tracking-widest text-ink-paper hover:bg-ink-paper/10 hover:border-ink-paper/40 transition-colors"
+              aria-label={`Call ${siteConfig.brand.name} at ${siteConfig.contact.phone}`}
+            >
+              <Phone className="w-3.5 h-3.5 text-blood" />
+              <span>Call</span>
+            </a>
+            <a
+              href={siteConfig.contact.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 px-5 py-2 bg-blood hover:bg-blood-hover text-white rounded-none text-xs uppercase font-medium tracking-widest transition-all shadow-[0_0_15px_rgba(179,18,45,0.35)] hover:shadow-[0_0_20px_rgba(179,18,45,0.6)]"
+              aria-label="Book on WhatsApp"
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              <span>Book on WhatsApp</span>
+            </a>
+          </div>
+
+          {/* Mobile Hamburger Button */}
+          <div className="flex md:hidden items-center space-x-2">
+            <a
+              href={`tel:${siteConfig.contact.phoneClean}`}
+              className="p-2 border border-ink-paper/20 text-ink-paper hover:bg-ink-paper/10 rounded-none"
+              aria-label="Call studio"
+            >
+              <Phone className="w-4 h-4 text-blood" />
+            </a>
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-ink-paper hover:text-blood transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blood"
+              aria-expanded={mobileMenuOpen}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-dark-surface border-b border-ink-paper/10 px-6 py-6 space-y-5 animate-in slide-in-from-top-4 duration-200">
+          <nav className="flex flex-col space-y-4" aria-label="Mobile Navigation">
+            {siteConfig.navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={handleNavClick}
+                className="text-sm font-medium uppercase tracking-[0.2em] text-ink-paper/80 hover:text-blood py-2 border-b border-ink-paper/5 transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="pt-2 flex flex-col space-y-3">
+            <a
+              href={siteConfig.contact.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center space-x-2 w-full py-3 bg-blood text-white text-xs uppercase tracking-widest font-semibold"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>Book on WhatsApp</span>
+            </a>
+            <a
+              href={`tel:${siteConfig.contact.phoneClean}`}
+              className="flex items-center justify-center space-x-2 w-full py-3 border border-ink-paper/20 text-ink-paper text-xs uppercase tracking-widest"
+            >
+              <Phone className="w-4 h-4 text-blood" />
+              <span>Call {siteConfig.contact.phone}</span>
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
