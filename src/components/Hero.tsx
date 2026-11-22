@@ -11,17 +11,33 @@ export default function Hero() {
     <section className="relative min-h-[90vh] lg:min-h-screen flex items-center overflow-hidden pt-28 sm:pt-36 pb-16">
       {/* Background Hero Image with Atmospheric Depth */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src={images.hero.src}
-          alt={images.hero.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center lg:object-[80%_center] filter contrast-105"
-        />
-        {/* Soft Vignette Gradients ensuring left content readability while hero art shines on right */}
-        <div className="absolute inset-0 bg-gradient-to-r from-theme-bg/95 via-theme-bg/75 to-theme-bg/25 sm:via-theme-bg/50 sm:to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-theme-bg via-transparent to-theme-bg/60" />
+        {/* Mobile Viewport Hero Image (< 640px) */}
+        <div className="block sm:hidden absolute inset-0">
+          <Image
+            src={images.hero.mobile}
+            alt={images.hero.alt}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center filter contrast-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-theme-bg via-theme-bg/60 to-theme-bg/20" />
+        </div>
+
+        {/* Desktop Viewport Hero Image (>= 640px) */}
+        <div className="hidden sm:block absolute inset-0">
+          <Image
+            src={images.hero.desktop}
+            alt={images.hero.alt}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center lg:object-[80%_center] filter contrast-105"
+          />
+          {/* Soft Vignette Gradients ensuring left content readability while hero art shines on right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-theme-bg/95 via-theme-bg/75 to-theme-bg/25 sm:via-theme-bg/50 sm:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-theme-bg via-transparent to-theme-bg/60" />
+        </div>
       </div>
 
       {/* Hero Content: Left Side Compact Cleaner White Container */}

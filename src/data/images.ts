@@ -27,7 +27,9 @@ export const images = {
     height: 200,
   },
   hero: {
-    src: "/images/hero_image_madmonk.webp",
+    desktop: "/images/hero-desktop.webp",
+    mobile: "/images/hero-mobile.webp",
+    src: "/images/hero-desktop.webp",
     alt: "Mad Monk Tattoo Studio - Custom Tattoo Art & Sanctuary",
     width: 2752,
     height: 1536,

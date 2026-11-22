@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.brand.name,
     images: [
       {
-        url: "/images/hero_image_madmonk.webp",
+        url: "/images/hero-desktop.webp",
         width: 1200,
         height: 630,
         alt: `${siteConfig.brand.name} - Custom Tattoo Studio`,
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.seo.title,
     description: siteConfig.seo.description,
-    images: ["/images/hero_image_madmonk.webp"],
+    images: ["/images/hero-desktop.webp"],
     creator: siteConfig.contact.instagram,
   },
   icons: {
@@ -82,7 +82,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "TattooParlor",
     "name": siteConfig.brand.name,
-    "image": `${siteConfig.seo.canonicalUrl}/images/hero_image_madmonk.webp`,
+    "image": `${siteConfig.seo.canonicalUrl}/images/hero-desktop.webp`,
     "description": siteConfig.seo.description,
     "telephone": siteConfig.contact.phone,
     "priceRange": "$$",
