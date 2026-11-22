@@ -56,6 +56,34 @@ export async function POST(request: Request) {
 
     const bookingData = validationResult.data;
 
+    const ideaText =
+      bookingData.tattooIdea && bookingData.tattooIdea.trim()
+        ? bookingData.tattooIdea.trim()
+        : "To be discussed during consultation";
+    const dateText = bookingData.preferredDate || "Flexible / Next Available";
+    const studioText = bookingData.preferredStudio || "Coimbatore Studio";
+
+    const customWhatsAppMsg = [
+      "🔥 *NEW TATTOO ENQUIRY // MAD MONK STUDIO*",
+      "",
+      "Hi Joo, I would like to book a custom tattoo consultation. Here are my details:",
+      "",
+      `👤 *Name:* ${bookingData.fullName}`,
+      `📱 *Phone / WhatsApp:* ${bookingData.phone}`,
+      `📍 *Placement:* ${bookingData.placement}`,
+      `🏛️ *Studio:* ${studioText}`,
+      `🗓️ *Preferred Date:* ${dateText}`,
+      "",
+      "💡 *Tattoo Idea & Symbolism:*",
+      `"${ideaText}"`,
+      "",
+      "Please let me know your available slots and personalized quote. Thank you!",
+    ].join("\n");
+
+    const customWhatsAppUrl = `https://wa.me/919080937352?text=${encodeURIComponent(
+      customWhatsAppMsg
+    )}`;
+
     // 3. Log booking request in server console
     console.log("=========================================");
     console.log("📩 NEW INCOMING TATTOO BOOKING REQUEST");
@@ -63,44 +91,19 @@ export async function POST(request: Request) {
     console.log("Client Name:", bookingData.fullName);
     console.log("Phone / WhatsApp:", bookingData.phone);
     console.log("Placement:", bookingData.placement);
-    console.log("Size:", bookingData.size);
-    console.log("Style:", bookingData.style);
-    console.log("Session Type:", bookingData.sessionType || "Not sure");
-    console.log("Preferred Studio:", bookingData.preferredStudio || "Coimbatore / Avinashi");
-    console.log("Preferred Date:", bookingData.preferredDate || "Flexible");
-    console.log("Tattoo Concept / Idea:\n", bookingData.tattooIdea);
-    console.log(
-      "Reference Images Attached:",
-      bookingData.referenceImages?.length || 0
-    );
+    console.log("Preferred Studio:", studioText);
+    console.log("Preferred Date:", dateText);
+    console.log("Tattoo Concept / Idea:\n", ideaText);
+    console.log("WhatsApp Deep Link:\n", customWhatsAppUrl);
     console.log("=========================================");
-
-    // =========================================================================
-    // TODO: Wire up your external notification channels here:
-    // -------------------------------------------------------------------------
-    // 1. Email Notification:
-    //    Use Resend, SendGrid, or Nodemailer to send an email alert to Joo
-    //    Example:
-    //    await resend.emails.send({
-    //      from: 'Mad Monk Studio <bookings@madmonktattoo.com>',
-    //      to: 'ink@madmonktattoo.com',
-    //      subject: `New Booking Request from ${bookingData.fullName}`,
-    //      text: `...details...`
-    //    });
-    //
-    // 2. Google Sheets sync:
-    //    Append row to studio appointment sheet via googleapis or Zapier webhook
-    //
-    // 3. WhatsApp Business Webhook:
-    //    Send automated confirmation or WhatsApp alert to studio phone
-    // =========================================================================
 
     return NextResponse.json(
       {
         success: true,
         message:
-          "Booking request received successfully! Joo will review your concept and reach out via WhatsApp.",
+          "Booking request received successfully! Joo will review your concept and connect on WhatsApp.",
         clientName: bookingData.fullName,
+        whatsappUrl: customWhatsAppUrl,
       },
       { status: 200 }
     );

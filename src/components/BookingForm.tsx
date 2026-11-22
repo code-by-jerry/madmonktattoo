@@ -53,6 +53,7 @@ export default function BookingForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [minDate, setMinDate] = useState<string>("");
+  const [customWhatsAppUrl, setCustomWhatsAppUrl] = useState<string>("");
 
   useEffect(() => {
     // Avoid server/client timezone mismatch on hydration
@@ -77,11 +78,54 @@ export default function BookingForm() {
     },
   });
 
+  const generateWhatsAppEnquiryUrl = (data: BookingFormData): string => {
+    const phone = "919080937352";
+    const ideaText =
+      data.tattooIdea && data.tattooIdea.trim()
+        ? data.tattooIdea.trim()
+        : "To be discussed during consultation";
+    const dateText = data.preferredDate ? data.preferredDate : "Flexible / Next Available";
+    const studioText = data.preferredStudio || "Coimbatore Studio";
+
+    const message = [
+      "🔥 *NEW TATTOO ENQUIRY // MAD MONK STUDIO*",
+      "",
+      "Hi Joo, I would like to book a custom tattoo consultation. Here are my details:",
+      "",
+      `👤 *Name:* ${data.fullName}`,
+      `📱 *Phone / WhatsApp:* ${data.phone}`,
+      `📍 *Placement:* ${data.placement}`,
+      `🏛️ *Studio:* ${studioText}`,
+      `🗓️ *Preferred Date:* ${dateText}`,
+      "",
+      "💡 *Tattoo Idea & Symbolism:*",
+      `"${ideaText}"`,
+      "",
+      "Please let me know your available slots and personalized quote. Thank you!",
+    ].join("\n");
+
+    return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  };
+
   const onSubmit = async (data: BookingFormData) => {
     setIsSubmitting(true);
     setSubmitError(null);
 
+    // 1. Build the custom WhatsApp link with the user's filled inputs
+    const waUrl = generateWhatsAppEnquiryUrl(data);
+    setCustomWhatsAppUrl(waUrl);
+
+    // 2. Open WhatsApp in new tab immediately during user gesture
     try {
+      if (typeof window !== "undefined") {
+        window.open(waUrl, "_blank", "noopener,noreferrer");
+      }
+    } catch {
+      // If browser blocked popup, fallback button on the success screen provides 1-tap open
+    }
+
+    try {
+      // 3. Simultaneously log to backend
       const res = await fetch("/api/booking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -97,11 +141,9 @@ export default function BookingForm() {
       setIsSuccess(true);
       reset();
     } catch (err: unknown) {
-      const msg =
-        err instanceof Error
-          ? err.message
-          : "Something went wrong. Please try again or WhatsApp us.";
-      setSubmitError(msg);
+      console.warn("API booking notice:", err);
+      // Still show success since WhatsApp was prepared/opened
+      setIsSuccess(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -131,26 +173,26 @@ export default function BookingForm() {
           <div className="p-8 sm:p-12 bg-theme-card border border-blood/60 text-center shadow-2xl animate-in fade-in duration-300">
             <CheckCircle2 className="w-16 h-16 text-blood mx-auto mb-6" />
             <h3 className="font-display text-2xl sm:text-3xl font-bold text-theme-text-primary">
-              Request Received
+              Enquiry Prepared for WhatsApp
             </h3>
             <p className="mt-3 text-theme-text-secondary text-sm sm:text-base max-w-lg mx-auto leading-relaxed font-light">
-              Thank you for reaching out. Joo has received your tattoo inquiry and will connect with you on WhatsApp shortly with initial thoughts and scheduling availability.
+              Your tattoo request has been formatted with your custom details. If WhatsApp didn&apos;t open automatically, tap the button below to send your message directly to Joo:
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href={siteConfig.contact.whatsappUrl}
+                href={customWhatsAppUrl || siteConfig.contact.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-3.5 bg-blood text-white text-xs uppercase tracking-widest font-semibold"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-4 bg-blood hover:bg-blood-hover text-white text-xs uppercase tracking-widest font-semibold transition-all shadow-[0_0_20px_rgba(179,18,45,0.4)]"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>Follow Up Instantly on WhatsApp</span>
+                <span>Open &amp; Send on WhatsApp</span>
               </a>
               <button
                 type="button"
                 onClick={() => setIsSuccess(false)}
-                className="w-full sm:w-auto px-6 py-3.5 border border-theme-border hover:border-blood text-theme-text-primary text-xs uppercase tracking-widest"
+                className="w-full sm:w-auto px-6 py-4 border border-theme-border hover:border-blood text-theme-text-primary text-xs uppercase tracking-widest transition-colors"
               >
                 Submit Another Request
               </button>
@@ -340,14 +382,17 @@ export default function BookingForm() {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Transmitting To Studio...</span>
+                    <span>Preparing WhatsApp Consultation...</span>
                   </>
                 ) : (
-                  <span>Send Booking Request</span>
+                  <>
+                    <MessageCircle className="w-4 h-4 mr-1.5" />
+                    <span>Send Booking Request on WhatsApp</span>
+                  </>
                 )}
               </button>
               <p className="text-center text-[11px] text-theme-text-muted mt-3 font-light">
-                No payment charged now. Stencil details and personalized quote are shared after consultation.
+                Transfers directly to WhatsApp with Joo at +91 90809 37352. No upfront fee required.
               </p>
             </div>
           </form>
