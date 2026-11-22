@@ -32,7 +32,7 @@ export const images = {
   },
   artist: {
     src: "/images/artist.webp",
-    alt: "Midnight, lead custom tattoo artist at Mad Monk Tattoo Studio in Coimbatore",
+    alt: "Joo, lead custom tattoo artist at Mad Monk Tattoo Studio in Coimbatore",
     title: "Lead Resident Artist",
     width: 1200,
     height: 1600,

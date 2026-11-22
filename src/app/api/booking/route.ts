@@ -70,7 +70,7 @@ export async function POST(request: Request) {
     const customWhatsAppMsg = [
       "🔥 *NEW TATTOO ENQUIRY // MAD MONK STUDIO*",
       "",
-      "Hi Midnight, I would like to book a custom tattoo consultation. Here are my details:",
+      "Hi Joo, I would like to book a custom tattoo consultation. Here are my details:",
       "",
       `👤 *Name:* ${bookingData.fullName}`,
       `📱 *Phone / WhatsApp:* ${bookingData.phone}`,
@@ -92,7 +92,7 @@ export async function POST(request: Request) {
       {
         success: true,
         message:
-          "Booking request received successfully! Midnight will review your concept and connect on WhatsApp.",
+          "Booking request received successfully! Joo will review your concept and connect on WhatsApp.",
         clientName: bookingData.fullName,
         whatsappUrl: customWhatsAppUrl,
       },

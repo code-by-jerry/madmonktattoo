@@ -61,7 +61,7 @@ export default function Hero() {
 
           {/* Subline directly under H1 */}
           <p className="mt-3 text-blood text-sm sm:text-base font-medium tracking-wide">
-            Custom, realistic and portrait tattoos by Midnight.
+            Custom, realistic and portrait tattoos by Joo.
           </p>
 
           {/* Subtext */}

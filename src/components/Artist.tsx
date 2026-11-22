@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { siteConfig } from "@/data/site";
 import { images } from "@/data/images";
 import Image from "next/image";
+import { Instagram, ArrowUpRight } from "lucide-react";
 
 export default function Artist() {
   return (
@@ -41,6 +42,16 @@ export default function Artist() {
                   <p className="font-display text-lg text-theme-text-primary font-bold">
                     {siteConfig.artist.name}
                   </p>
+                  <a
+                    href={siteConfig.artist.instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-1.5 text-xs text-theme-text-muted hover:text-blood transition-colors mt-1 font-mono"
+                  >
+                    <Instagram className="w-3.5 h-3.5 text-blood" />
+                    <span>{siteConfig.artist.instagram}</span>
+                    <ArrowUpRight className="w-3 h-3 text-theme-text-muted" />
+                  </a>
                 </div>
               </div>
             </div>
@@ -59,7 +70,7 @@ export default function Artist() {
             </div>
             
             <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-theme-text-primary">
-              Meet Midnight, Your Tattoo Artist
+              Meet Joo, Your Tattoo Artist
             </h2>
 
             <div className="mt-6 space-y-4 text-theme-text-secondary text-sm sm:text-base leading-relaxed font-light">
@@ -91,12 +102,23 @@ export default function Artist() {
             </div>
 
             {/* Action link */}
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <a
                 href="#process"
                 className="inline-flex items-center space-x-2 text-xs uppercase tracking-[0.2em] text-theme-text-primary hover:text-blood transition-colors font-medium font-mono"
               >
-                <span>Read Studio Ritual & Workflow →</span>
+                <span>Read Studio Ritual &amp; Workflow →</span>
+              </a>
+
+              <a
+                href={siteConfig.artist.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 px-3.5 py-2 border border-theme-border hover:border-blood text-xs uppercase font-mono tracking-wider text-theme-text-primary hover:text-blood transition-colors bg-theme-card shadow-sm"
+              >
+                <Instagram className="w-3.5 h-3.5 text-blood" />
+                <span>Follow {siteConfig.artist.instagram}</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-theme-text-muted" />
               </a>
             </div>
           </motion.div>

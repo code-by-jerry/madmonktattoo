@@ -42,7 +42,17 @@ export default function JsonLd() {
         closes: "23:00",
       },
     ],
-    sameAs: [siteConfig.contact.instagramUrl],
+    sameAs: [
+      siteConfig.contact.instagramUrl,
+      siteConfig.artist.instagramUrl,
+    ],
+    founder: {
+      "@type": "Person",
+      name: siteConfig.artist.name,
+      jobTitle: "Founder & Lead Custom Tattoo Artist",
+      url: seoData.domain,
+      sameAs: [siteConfig.artist.instagramUrl],
+    },
     areaServed: ["Coimbatore", "Tirupur"],
   };
 

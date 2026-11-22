@@ -98,7 +98,7 @@ export const siteConfig = {
     whatsapp: "+919080937352",
     whatsappDisplay: "+91 90809 37352",
     whatsappMessage:
-      "Hi Midnight, I would like to inquire about booking a custom tattoo session at Mad Monk Tattoo.",
+      "Hi Joo, I would like to inquire about booking a custom tattoo session at Mad Monk Tattoo.",
     get whatsappUrl() {
       return `https://wa.me/${this.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
         this.whatsappMessage
@@ -132,11 +132,13 @@ export const siteConfig = {
   },
 
   artist: {
-    name: "Midnight",
+    name: "Joo",
     title: "Founder & Lead Custom Artist",
+    instagram: "@stranger_smile_",
+    instagramUrl: "https://www.instagram.com/stranger_smile_",
     bio: [
-      "Mad Monk Tattoo is a premier private tattoo studio in Coimbatore, also proudly serving Tirupur and Avinashi with uncompromising dedication to the craft. Founded by Midnight, our sanctuary specializes in custom, realistic, and portrait tattoos created exclusively through one-on-one rituals.",
-      "With over 5+ years of dedicated studio experience and hundreds of custom permanent tattoo pieces inked, Midnight approaches every design as an intimate collaboration with your anatomy. We reject generic flash art in favor of authentic storytelling, rendering hyper-detailed realism, fine-needle portraits, and heavy sacred blackwork in a tranquil, clinical-grade setting. Whether you are getting your first tattoo or an extensive full-day composition, experience timeless artistry engineered to live with you forever.",
+      "Mad Monk Tattoo is a premier private tattoo studio in Coimbatore, also proudly serving Tirupur and Avinashi with uncompromising dedication to the craft. Founded by Joo, our sanctuary specializes in custom, realistic, and portrait tattoos created exclusively through one-on-one rituals.",
+      "With over 5+ years of dedicated studio experience and hundreds of custom permanent tattoo pieces inked, Joo approaches every design as an intimate collaboration with your anatomy. We reject generic flash art in favor of authentic storytelling, rendering hyper-detailed realism, fine-needle portraits, and heavy sacred blackwork in a tranquil, clinical-grade setting. Whether you are getting your first tattoo or an extensive full-day composition, experience timeless artistry engineered to live with you forever.",
     ],
     stats: [
       { label: "Years of Craft", value: "5+ Years" },
@@ -161,7 +163,7 @@ export const siteConfig = {
       id: "portrait",
       title: "Portrait",
       description:
-        "Lifelike portrait tattoos capturing loved ones, icons, and historical figures with hyper-accurate tonal depth. Midnight meticulously maps every facial contour, expressive shadow, and highlight to deliver an emotional, enduring homage with flawless skin transitions.",
+        "Lifelike portrait tattoos capturing loved ones, icons, and historical figures with hyper-accurate tonal depth. Joo meticulously maps every facial contour, expressive shadow, and highlight to deliver an emotional, enduring homage with flawless skin transitions.",
       imageKey: "stylePortrait",
     },
     {
@@ -189,7 +191,7 @@ export const siteConfig = {
       id: "custom",
       title: "Custom / Customized",
       description:
-        "One-of-a-kind bespoke tattoo compositions drafted from scratch to reflect your personal story and anatomy. Midnight conducts deep conceptual consultations, crafting original stencils with zero replicated templates—ensuring your ink remains strictly unique in the world.",
+        "One-of-a-kind bespoke tattoo compositions drafted from scratch to reflect your personal story and anatomy. Joo conducts deep conceptual consultations, crafting original stencils with zero replicated templates—ensuring your ink remains strictly unique in the world.",
       imageKey: "styleCustom",
     },
     {
@@ -221,7 +223,7 @@ export const siteConfig = {
       title: "Custom Design",
       subtitle: "Bespoke Linework",
       description:
-        "Midnight drafts an original, tailor-made stencil crafted specifically for your skin curvature. You review the mockups, tweak elements, and approve before needle meets skin.",
+        "Joo drafts an original, tailor-made stencil crafted specifically for your skin curvature. You review the mockups, tweak elements, and approve before needle meets skin.",
     },
     {
       number: "03",
@@ -330,7 +332,7 @@ export const siteConfig = {
       tattooType: "Realistic Portrait & Shading",
       rating: 5,
       quote:
-        "Midnight didn't just tattoo me; he listened to the grief and renewal story behind it and drafted something breathtaking. The studio was dead quiet, clinical, and meditative. The realism linework after 6 months is still pitch-black and surgical.",
+        "Joo didn't just tattoo me; he listened to the grief and renewal story behind it and drafted something breathtaking. The studio was dead quiet, clinical, and meditative. The realism linework after 6 months is still pitch-black and surgical.",
     },
     {
       id: "review-2",
@@ -348,7 +350,7 @@ export const siteConfig = {
       tattooType: "Custom Blackwork Cover-up",
       rating: 5,
       quote:
-        "Had a faded 10-year-old piece that other studios refused to touch. Midnight designed a bespoke dark neo-traditional blackwork raven that completely transformed the area. Absolutely legendary work.",
+        "Had a faded 10-year-old piece that other studios refused to touch. Joo designed a bespoke dark neo-traditional blackwork raven that completely transformed the area. Absolutely legendary work.",
     },
   ] as Testimonial[],
 
@@ -370,7 +372,7 @@ export const siteConfig = {
       id: "portrait-realistic",
       question: "Do you specialize in realistic and portrait tattoos?",
       answer:
-        "Midnight specializes extensively in realistic and portrait tattoos using high-definition black and grey shading techniques. Whether commemorating a family member, a sacred icon, or a cinematic figure, each portrait is prepared with comprehensive anatomical reference mapping and micro-needle tonal blending to ensure lifelike expression and smooth, enduring skin transitions.",
+        "Joo specializes extensively in realistic and portrait tattoos using high-definition black and grey shading techniques. Whether commemorating a family member, a sacred icon, or a cinematic figure, each portrait is prepared with comprehensive anatomical reference mapping and micro-needle tonal blending to ensure lifelike expression and smooth, enduring skin transitions.",
     },
     {
       id: "session-duration",
@@ -394,13 +396,13 @@ export const siteConfig = {
       id: "cover-ups",
       question: "Can you cover up an old tattoo?",
       answer:
-        "Yes, custom cover-up and rework projects are a core studio strength. Midnight reviews your existing tattoo’s density, pigmentation, and skin texture during an in-depth consultation. We then compose bespoke blackwork, dark ornamental motifs, or realism elements that naturally integrate and disguise the old piece without requiring awkward dark solid blobs.",
+        "Yes, custom cover-up and rework projects are a core studio strength. Joo reviews your existing tattoo’s density, pigmentation, and skin texture during an in-depth consultation. We then compose bespoke blackwork, dark ornamental motifs, or realism elements that naturally integrate and disguise the old piece without requiring awkward dark solid blobs.",
     },
     {
       id: "quote",
       question: "How do I get a quote?",
       answer:
-        "Getting an estimate is simple and free. Send us your tattoo idea, reference images, approximate dimensions, and preferred body placement through our online booking form or via direct WhatsApp message. Midnight reviews every concept personally and provides an honest, tailored estimate with recommended session time within 24 hours.",
+        "Getting an estimate is simple and free. Send us your tattoo idea, reference images, approximate dimensions, and preferred body placement through our online booking form or via direct WhatsApp message. Joo reviews every concept personally and provides an honest, tailored estimate with recommended session time within 24 hours.",
     },
   ] as FAQItem[],
 };

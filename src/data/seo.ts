@@ -70,11 +70,11 @@ export const seoData = {
   },
   headings: {
     h1: "Best Tattoo Studio in Coimbatore & Tirupur",
-    h1Subline: "Custom, realistic and portrait tattoos by Midnight.",
+    h1Subline: "Custom, realistic and portrait tattoos by Joo.",
     h2s: {
       gallery: "Portrait & Realistic Tattoos",
       styles: "Custom Tattoo Styles",
-      artist: "Meet Midnight, Your Tattoo Artist",
+      artist: "Meet Joo, Your Tattoo Artist",
       process: "Our Tattoo Process",
       sessions: "Sessions, Tailored to Your Story",
       faqs: "Tattoo FAQs in Coimbatore & Tirupur",
