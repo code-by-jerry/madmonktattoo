@@ -27,10 +27,10 @@ export const images = {
     height: 200,
   },
   hero: {
-    src: "/placeholders/hero-tattoo.svg",
-    alt: "Mad Monk Tattoo Studio - Dark custom ink artwork",
-    width: 1920,
-    height: 1080,
+    src: "/images/hero.webp",
+    alt: "Mad Monk Tattoo Studio - Custom Tattoo Art & Sanctuary",
+    width: 2752,
+    height: 1536,
   },
   artist: {
     src: "/placeholders/artist-portrait.svg",

@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import { siteConfig } from "@/data/site";
 import { images } from "@/data/images";
 import Image from "next/image";
-import { MessageCircle, Calendar, ShieldCheck, ChevronDown } from "lucide-react";
+import { MessageCircle, Calendar, ShieldCheck } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 sm:pt-36 pb-16">
-      {/* Background with Dark Ink Ambience & Placeholder Image */}
+    <section className="relative min-h-[90vh] lg:min-h-screen flex items-center overflow-hidden pt-28 sm:pt-36 pb-16">
+      {/* Background Hero Image with Atmospheric Depth */}
       <div className="absolute inset-0 z-0">
         <Image
           src={images.hero.src}
@@ -17,87 +17,71 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-20 dark:opacity-25 scale-105"
+          className="object-cover object-center lg:object-[80%_center] filter contrast-105"
         />
-        {/* Gradients blending into current theme background */}
-        <div className="absolute inset-0 bg-gradient-to-t from-theme-bg via-theme-bg/85 to-theme-bg/95" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(179,18,45,0.08)_0%,transparent_70%)]" />
+        {/* Soft Vignette Gradients ensuring left content readability while hero art shines on right */}
+        <div className="absolute inset-0 bg-gradient-to-r from-theme-bg/95 via-theme-bg/75 to-theme-bg/25 sm:via-theme-bg/50 sm:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-theme-bg via-transparent to-theme-bg/60" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-theme-text-primary leading-[1.08] max-w-4xl"
-        >
-          Your Story, <span className="text-blood italic">Inked.</span>
-        </motion.h1>
-
-        {/* Short Subtext */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="mt-6 text-base sm:text-lg md:text-xl text-theme-text-secondary max-w-2xl font-light leading-relaxed tracking-wide"
-        >
-          {siteConfig.brand.subheadline}
-        </motion.p>
-
-        {/* Call To Actions */}
+      {/* Hero Content: Left Side Compact Cleaner White Container */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-start">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.45 }}
-          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.65, ease: "easeOut" }}
+          className="w-full max-w-lg lg:max-w-xl bg-white/95 dark:bg-black/90 backdrop-blur-md p-6 sm:p-8 md:p-10 border border-zinc-200/90 dark:border-white/10 shadow-2xl text-left"
         >
-          <a
-            href={siteConfig.contact.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 px-8 py-4 bg-blood hover:bg-blood-hover text-white text-xs uppercase tracking-[0.25em] font-semibold transition-all shadow-[0_0_25px_rgba(179,18,45,0.4)] hover:shadow-[0_0_35px_rgba(179,18,45,0.7)] group"
-          >
-            <MessageCircle className="w-4 h-4 transition-transform group-hover:scale-110" />
-            <span>Book on WhatsApp</span>
-          </a>
+          {/* Studio Location & Discipline Badge */}
+          <div className="inline-flex items-center space-x-2 text-blood text-[10px] sm:text-xs uppercase tracking-[0.25em] font-mono mb-3">
+            <span className="w-1.5 h-1.5 bg-blood rotate-45 inline-block" />
+            <span>Coimbatore & Avinashi Studio</span>
+          </div>
 
-          <a
-            href="#booking"
-            className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 px-8 py-4 border border-theme-border hover:border-blood bg-theme-card/60 hover:bg-theme-surface text-theme-text-primary text-xs uppercase tracking-[0.25em] font-semibold transition-all shadow-sm"
-          >
-            <Calendar className="w-4 h-4 text-blood" />
-            <span>Request a Booking</span>
-          </a>
-        </motion.div>
+          {/* Headline */}
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white leading-[1.12]">
+            Your Story, <span className="text-blood italic">Inked.</span>
+          </h1>
 
-        {/* Small Trust Row */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-14 pt-8 border-t border-theme-border w-full max-w-3xl"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          {/* Subtext */}
+          <p className="mt-4 text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm md:text-[15px] leading-relaxed font-light">
+            {siteConfig.brand.subheadline}
+          </p>
+
+          {/* Action CTAs */}
+          <div className="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <a
+              href={siteConfig.contact.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center space-x-2.5 px-6 py-3.5 bg-blood hover:bg-blood-hover text-white text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-[0_0_20px_rgba(179,18,45,0.35)] hover:shadow-[0_0_25px_rgba(179,18,45,0.6)]"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>Book on WhatsApp</span>
+            </a>
+
+            <a
+              href="#booking"
+              className="inline-flex items-center justify-center space-x-2 px-6 py-3.5 border border-zinc-300 dark:border-zinc-700 hover:border-blood text-zinc-900 dark:text-white text-xs uppercase tracking-[0.2em] font-medium transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
+            >
+              <Calendar className="w-4 h-4 text-blood" />
+              <span>Request a Session</span>
+            </a>
+          </div>
+
+          {/* Compact Trust Row */}
+          <div className="mt-8 pt-6 border-t border-zinc-200 dark:border-zinc-800 grid grid-cols-2 gap-3">
             {siteConfig.brand.trustRow.map((item, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center space-x-2 text-theme-text-secondary text-xs tracking-wider"
+                className="flex items-center space-x-2 text-zinc-600 dark:text-zinc-400 text-[11px] tracking-wide"
               >
                 <ShieldCheck className="w-3.5 h-3.5 text-blood shrink-0" />
-                <span>{item}</span>
+                <span className="font-light">{item}</span>
               </div>
             ))}
           </div>
         </motion.div>
-
-        {/* Scroll indicator */}
-        <div className="mt-12 hidden md:flex flex-col items-center text-theme-text-muted hover:text-theme-text-primary transition-colors">
-          <a href="#work" className="flex flex-col items-center" aria-label="Scroll to portfolio">
-            <span className="text-[10px] uppercase tracking-[0.3em] mb-1 font-mono">Explore</span>
-            <ChevronDown className="w-4 h-4 text-blood animate-bounce" />
-          </a>
-        </div>
       </div>
     </section>
   );
