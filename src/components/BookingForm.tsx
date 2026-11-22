@@ -27,6 +27,7 @@ const clientBookingSchema = z.object({
   placement: z.string().min(1, "Please select a body placement"),
   size: z.string().min(1, "Please select an approximate size"),
   style: z.string().min(1, "Please select a preferred tattoo style"),
+  sessionType: z.string().optional(),
   preferredStudio: z.string().optional(),
   preferredDate: z.string().optional(),
   website: z.string().max(0).optional(), // honeypot
@@ -81,6 +82,13 @@ const STUDIO_OPTIONS = [
   "Either Location (Flexible)",
 ];
 
+const SESSION_TYPE_OPTIONS = [
+  "Small & Minimal",
+  "Half-Day",
+  "Full-Day",
+  "Not sure",
+];
+
 export default function BookingForm() {
   const [images, setImages] = useState<ImagePreview[]>([]);
   const [imageError, setImageError] = useState<string | null>(null);
@@ -90,15 +98,11 @@ export default function BookingForm() {
   const [minDate, setMinDate] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  useEffect(() => {
-    // Avoid server/client timezone mismatch on hydration
-    setMinDate(new Date().toISOString().split("T")[0]);
-  }, []);
-
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<BookingFormData>({
     resolver: zodResolver(clientBookingSchema),
@@ -109,11 +113,27 @@ export default function BookingForm() {
       placement: "",
       size: "",
       style: "",
+      sessionType: "Not sure",
       preferredStudio: "Coimbatore Studio",
       preferredDate: "",
       website: "",
     },
   });
+
+  useEffect(() => {
+    // Avoid server/client timezone mismatch on hydration
+    setMinDate(new Date().toISOString().split("T")[0]);
+
+    // Pre-select session type when triggered from session cards
+    const handleSessionEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<string>;
+      if (customEvent.detail) {
+        setValue("sessionType", customEvent.detail, { shouldValidate: true });
+      }
+    };
+    window.addEventListener("select-session-type", handleSessionEvent);
+    return () => window.removeEventListener("select-session-type", handleSessionEvent);
+  }, [setValue]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImageError(null);
@@ -415,19 +435,40 @@ export default function BookingForm() {
               </div>
             </div>
 
-            {/* Preferred Date */}
-            <div>
-              <label htmlFor="preferredDate" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
-                Preferred Date (Optional)
-              </label>
-              <div className="relative">
-                <input
-                  id="preferredDate"
-                  type="date"
-                  min={minDate || undefined}
-                  {...register("preferredDate")}
+            {/* Select Row: Session Type & Preferred Date */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {/* Target Session Type */}
+              <div>
+                <label htmlFor="sessionType" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
+                  Session Type
+                </label>
+                <select
+                  id="sessionType"
+                  {...register("sessionType")}
                   className="w-full px-4 py-3 bg-theme-bg border border-theme-border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors"
-                />
+                >
+                  {SESSION_TYPE_OPTIONS.map((opt) => (
+                    <option key={opt} value={opt} className="bg-theme-bg text-theme-text-primary">
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Preferred Date */}
+              <div>
+                <label htmlFor="preferredDate" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
+                  Preferred Date (Optional)
+                </label>
+                <div className="relative">
+                  <input
+                    id="preferredDate"
+                    type="date"
+                    min={minDate || undefined}
+                    {...register("preferredDate")}
+                    className="w-full px-4 py-3 bg-theme-bg border border-theme-border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors"
+                  />
+                </div>
               </div>
             </div>
 
@@ -541,7 +582,7 @@ export default function BookingForm() {
                 )}
               </button>
               <p className="text-center text-[11px] text-theme-text-muted mt-3 font-light">
-                No payment charged now. Session date and stencil deposit are agreed upon after consultation.
+                No payment charged now. Stencil details and personalized quote are shared after consultation.
               </p>
             </div>
           </form>

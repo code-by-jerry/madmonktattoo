@@ -85,7 +85,7 @@ export default function RootLayout({
     "image": `${siteConfig.seo.canonicalUrl}/placeholders/hero-tattoo.svg`,
     "description": siteConfig.seo.description,
     "telephone": siteConfig.contact.phone,
-    "priceRange": "₹₹ - ₹₹₹",
+    "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Coimbatore & Palangarai, Avinashi",

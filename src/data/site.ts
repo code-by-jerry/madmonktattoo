@@ -17,15 +17,36 @@ export interface ProcessStep {
   description: string;
 }
 
-export interface PricingTier {
+export interface SessionTier {
   id: string;
   name: string;
+  sessionType: string;
   badge?: string;
-  startingPrice: string;
+  priceLabel: string;
   duration: string;
   description: string;
   features: string[];
   recommended?: boolean;
+}
+
+export type PricingTier = SessionTier;
+
+export interface SessionOffer {
+  badge: string;
+  headline: string;
+  description: string;
+  cta: string;
+  offerEndDate: string;
+  offerEndDisplay: string;
+  note: string;
+}
+
+export interface SessionsSection {
+  eyebrow: string;
+  heading: string;
+  subtext: string;
+  tiers: SessionTier[];
+  offer: SessionOffer;
 }
 
 export interface Testimonial {
@@ -211,64 +232,88 @@ export const siteConfig = {
     },
   ] as ProcessStep[],
 
-  pricing: [
-    {
-      id: "small",
-      name: "Small & Minimal Piece",
-      badge: "Signature Entry",
-      startingPrice: "₹3,500",
-      duration: "1 – 2 Hours",
+  sessions: {
+    eyebrow: "// 05 SESSIONS",
+    heading: "Sessions, Tailored to Your Story",
+    subtext:
+      "Every tattoo is custom, so every quote is too. Share your idea and we'll send a personalised quote within 24 hours.",
+    tiers: [
+      {
+        id: "small-minimal",
+        sessionType: "Small & Minimal",
+        name: "Small & Minimal Piece",
+        badge: "Signature Entry",
+        priceLabel: "Quote on enquiry",
+        duration: "1 – 2 Hours",
+        description:
+          "Ideal for first-timers, micro-tattoos, finger sigils, or clean fine-line quotes and symbols.",
+        features: [
+          "Up to 2.5 × 2.5 inches in size",
+          "Single-needle or fine linework",
+          "Custom design sketch included",
+          "Sterile single-use setup & aftercare kit",
+          "Complimentary touch-up within 60 days",
+        ],
+        recommended: false,
+      },
+      {
+        id: "half-day",
+        sessionType: "Half-Day",
+        name: "Half-Day Session",
+        badge: "Most Popular",
+        priceLabel: "Quote on enquiry",
+        duration: "4 – 5 Hours",
+        description:
+          "Perfect for forearm pieces, calf panels, geometric mandalas, or detailed dark linework compositions.",
+        features: [
+          "Medium-to-large custom piece (approx. 5 × 7 inches)",
+          "Intricate dotwork, shading & black fills",
+          "In-depth design consultation & iterations",
+          "Breathable second-skin healing wrap",
+          "Beverage & snack breaks included",
+          "Priority scheduling",
+        ],
+        recommended: true,
+      },
+      {
+        id: "full-day",
+        sessionType: "Full-Day",
+        name: "Full-Day Immersion",
+        badge: "Masterpiece",
+        priceLabel: "Quote on enquiry",
+        duration: "7 – 8 Hours",
+        description:
+          "Dedicated to large scale work: full sleeves, backplates, chest panels, or complex cover-up projects.",
+        features: [
+          "Full studio exclusivity for the day",
+          "Large-scale multi-element compositions",
+          "Comprehensive anatomical stencil mapping",
+          "Premium aftercare bundle & organic balm",
+          "Lifetime healed check-ups",
+          "Pre-session dietary & skin prep guide",
+        ],
+        recommended: false,
+      },
+    ] as SessionTier[],
+    offer: {
+      badge: "Launch Month Special",
+      headline: "Launch Month Offer",
       description:
-        "Ideal for first-timers, micro-tattoos, finger sigils, or clean fine-line quotes and symbols.",
-      features: [
-        "Up to 2.5 × 2.5 inches in size",
-        "Single-needle or fine linework",
-        "Custom design sketch included",
-        "Sterile single-use setup & aftercare kit",
-        "Complimentary touch-up within 60 days",
-      ],
-      recommended: false,
+        "Book a consultation this month and get a free custom design sketch. Limited slots.",
+      cta: "Claim Offer →",
+      offerEndDate: "2026-12-31",
+      offerEndDisplay: "Limited monthly slots available",
+      note: "No hidden costs. Final quote shared after consultation.",
     },
-    {
-      id: "half-day",
-      name: "Half-Day Session",
-      badge: "Most Popular",
-      startingPrice: "₹12,000",
-      duration: "4 – 5 Hours",
-      description:
-        "Perfect for forearm pieces, calf panels, geometric mandalas, or detailed dark linework compositions.",
-      features: [
-        "Medium-to-large custom piece (approx. 5 × 7 inches)",
-        "Intricate dotwork, shading & black fills",
-        "In-depth design consultation & iterations",
-        "Breathable second-skin healing wrap",
-        "Beverage & snack breaks included",
-        "Priority scheduling",
-      ],
-      recommended: true,
-    },
-    {
-      id: "full-day",
-      name: "Full-Day Immersion",
-      badge: "Masterpiece",
-      startingPrice: "₹22,000",
-      duration: "7 – 8 Hours",
-      description:
-        "Dedicated to large scale work: full sleeves, backplates, chest panels, or complex cover-up projects.",
-      features: [
-        "Full studio exclusivity for the day",
-        "Large-scale multi-element compositions",
-        "Comprehensive anatomical stencil mapping",
-        "Premium aftercare bundle & organic balm",
-        "Lifetime healed check-ups",
-        "Pre-session dietary & skin prep guide",
-      ],
-      recommended: false,
-    },
-  ] as PricingTier[],
+  },
 
-  pricingNote:
-    "Note: A 30% advance deposit is required to confirm your session date and start custom stencil development. The deposit is fully deducted from your final session total.",
+  get pricing() {
+    return this.sessions.tiers;
+  },
+
+  get pricingNote() {
+    return this.sessions.offer.note;
+  },
 
   testimonials: [
     {
@@ -315,9 +360,9 @@ export const siteConfig = {
     },
     {
       id: "cost",
-      question: "How is the final tattoo cost calculated?",
+      question: "How is the tattoo quote calculated?",
       answer:
-        "Pricing is determined by design complexity, detail density, body placement, and session duration rather than a flat rate. Small pieces have fixed minimums, while larger pieces are booked as half-day or full-day sessions. We provide a transparent quote before you commit.",
+        "Quotes are determined by design complexity, detail density, body placement, and session duration. Every piece is estimated individually based on whether it is a small minimal piece, half-day, or full-day session. We provide a transparent personalized quote before you commit.",
     },
     {
       id: "cover-ups",
@@ -329,7 +374,7 @@ export const siteConfig = {
       id: "deposit",
       question: "Why do you require an advance deposit?",
       answer:
-        "A 30% advance deposit secures your calendar slot and compensates for the hours spent researching and drafting your custom stencil prior to your appointment. The deposit is non-refundable but 100% credited toward your final tattoo bill.",
+        "An advance deposit secures your calendar slot and compensates for the hours spent researching and drafting your custom stencil prior to your appointment. The deposit is non-refundable but 100% credited toward your final tattoo session.",
     },
     {
       id: "requirements",

@@ -14,6 +14,7 @@ const bookingSchema = z.object({
   placement: z.string().min(1, "Please select a body placement"),
   size: z.string().min(1, "Please select an approximate size"),
   style: z.string().min(1, "Please select a preferred tattoo style"),
+  sessionType: z.string().optional(),
   preferredStudio: z.string().optional(),
   preferredDate: z.string().optional(),
   // Reference images encoded as base64 or file metadata strings
@@ -68,6 +69,7 @@ export async function POST(request: Request) {
     console.log("Placement:", bookingData.placement);
     console.log("Size:", bookingData.size);
     console.log("Style:", bookingData.style);
+    console.log("Session Type:", bookingData.sessionType || "Not sure");
     console.log("Preferred Studio:", bookingData.preferredStudio || "Coimbatore / Avinashi");
     console.log("Preferred Date:", bookingData.preferredDate || "Flexible");
     console.log("Tattoo Concept / Idea:\n", bookingData.tattooIdea);
