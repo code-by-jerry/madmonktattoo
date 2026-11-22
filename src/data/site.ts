@@ -103,8 +103,8 @@ export const siteConfig = {
         this.whatsappMessage
       )}`;
     },
-    instagram: "@madmonktattoo",
-    instagramUrl: "https://instagram.com/madmonktattoo",
+    instagram: "@mad.monk.tattoo",
+    instagramUrl: "https://www.instagram.com/mad.monk.tattoo/",
     email: "ink@madmonktattoo.com",
     address: "Coimbatore & Palangarai (Avinashi), Tamil Nadu, India",
     studioTimings: "Tue – Sun: 11:00 AM – 8:00 PM (Mondays Closed / Strictly By Appointment)",
