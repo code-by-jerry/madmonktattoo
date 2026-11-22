@@ -43,7 +43,7 @@ const PLACEMENT_OPTIONS = [
 ];
 
 const STUDIO_OPTIONS = [
-  "Coimbatore Studio",
+  "Malumichampatti, Coimbatore Studio",
   "Palangarai, Avinashi Studio",
   "Either Location (Flexible)",
 ];
@@ -71,7 +71,7 @@ export default function BookingForm() {
       fullName: "",
       phone: "",
       placement: "",
-      preferredStudio: "Coimbatore Studio",
+      preferredStudio: "Malumichampatti, Coimbatore Studio",
       preferredDate: "",
       tattooIdea: "",
       website: "",
@@ -85,7 +85,7 @@ export default function BookingForm() {
         ? data.tattooIdea.trim()
         : "To be discussed during consultation";
     const dateText = data.preferredDate ? data.preferredDate : "Flexible / Next Available";
-    const studioText = data.preferredStudio || "Coimbatore Studio";
+    const studioText = data.preferredStudio || "Malumichampatti, Coimbatore Studio";
 
     const message = [
       "🔥 *NEW TATTOO ENQUIRY // MAD MONK STUDIO*",

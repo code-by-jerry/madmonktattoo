@@ -61,7 +61,8 @@ export async function POST(request: Request) {
         ? bookingData.tattooIdea.trim()
         : "To be discussed during consultation";
     const dateText = bookingData.preferredDate || "Flexible / Next Available";
-    const studioText = bookingData.preferredStudio || "Coimbatore Studio";
+    const studioText =
+      bookingData.preferredStudio || "Malumichampatti, Coimbatore Studio";
 
     const customWhatsAppMsg = [
       "🔥 *NEW TATTOO ENQUIRY // MAD MONK STUDIO*",

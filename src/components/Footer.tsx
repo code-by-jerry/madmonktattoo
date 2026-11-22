@@ -57,7 +57,7 @@ export default function Footer() {
                 </div>
               </Link>
               <p className="text-xs sm:text-sm text-theme-text-secondary font-light leading-relaxed max-w-sm mt-3">
-                Sacred linework, bespoke dark neo-traditional, and anatomical blackwork. Operating by private appointment across Coimbatore & Palangarai (Avinashi), Tamil Nadu.
+                Sacred linework, bespoke dark neo-traditional, and anatomical blackwork. Operating by private appointment across Malumichampatti, Coimbatore &amp; Palangarai, Avinashi, Tamil Nadu.
               </p>
             </div>
 
@@ -195,7 +195,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between text-[11px] text-theme-text-muted font-mono">
           <p>© {currentYear} {siteConfig.brand.name}. All rights reserved.</p>
           <p className="mt-2 sm:mt-0 tracking-wider">
-            Coimbatore & Avinashi • Sterile Single-Use Cartridges • Strictly By Appointment
+            Malumichampatti, Coimbatore &amp; Palangarai, Avinashi • Sterile Single-Use Cartridges • Strictly By Appointment
           </p>
         </div>
       </div>

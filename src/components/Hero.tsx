@@ -51,7 +51,7 @@ export default function Hero() {
           {/* Studio Location & Discipline Badge */}
           <div className="inline-flex items-center space-x-2 text-blood text-[10px] sm:text-xs uppercase tracking-[0.25em] font-mono mb-3">
             <span className="w-1.5 h-1.5 bg-blood rotate-45 inline-block" />
-            <span>Coimbatore & Avinashi Studio</span>
+            <span>Malumichampatti, Coimbatore &amp; Palangarai, Avinashi</span>
           </div>
 
           {/* Headline */}

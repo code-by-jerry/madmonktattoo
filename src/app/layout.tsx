@@ -88,8 +88,8 @@ export default function RootLayout({
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Coimbatore & Palangarai, Avinashi",
-      "addressLocality": "Coimbatore",
+      "streetAddress": "Malumichampatti, Coimbatore & Palangarai, Avinashi",
+      "addressLocality": "Malumichampatti, Coimbatore",
       "addressRegion": "Tamil Nadu",
       "postalCode": "641001",
       "addressCountry": "IN",

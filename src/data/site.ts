@@ -81,7 +81,7 @@ export const siteConfig = {
     submark: "CUSTOM TATTOO STUDIO",
     headline: "Your Story, Inked.",
     subheadline:
-      "Sacred linework, dark neo-traditional, and bespoke custom blackwork by appointment in Coimbatore & Palangarai (Avinashi), Tamil Nadu. Where raw storytelling meets monastic precision.",
+      "Sacred linework, dark neo-traditional, and bespoke custom blackwork by appointment in Malumichampatti (Coimbatore) & Palangarai (Avinashi), Tamil Nadu. Where raw storytelling meets monastic precision.",
     bookingBadge: "Now Booking • Limited Monthly Sessions",
     trustRow: [
       "Custom designs only",
@@ -106,15 +106,15 @@ export const siteConfig = {
     instagram: "@mad.monk.tattoo",
     instagramUrl: "https://www.instagram.com/mad.monk.tattoo/",
     email: "ink@madmonktattoo.com",
-    address: "Coimbatore & Palangarai (Avinashi), Tamil Nadu, India",
+    address: "Malumichampatti, Coimbatore & Palangarai, Avinashi, Tamil Nadu, India",
     studioTimings: "Sun – Sat: 9:00 AM – 11:00 PM (Daily / By Appointment)",
     studios: [
       {
         id: "coimbatore",
-        name: "Coimbatore Studio",
+        name: "Malumichampatti, Coimbatore Studio",
         shortName: "Coimbatore",
-        city: "Coimbatore, Tamil Nadu",
-        address: "MAD MONK TATTOO STUDIO, Coimbatore, Tamil Nadu, India",
+        city: "Malumichampatti, Coimbatore, Tamil Nadu",
+        address: "MAD MONK TATTOO STUDIO, Malumichampatti, Coimbatore, Tamil Nadu, India",
         embedUrl:
           "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d250739.51543493313!2d76.69366836547853!3d10.902424830288496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba85b8fac8737e3%3A0xfa7622728c80d4d9!2sMAD%20MONK%20TATTOO%20STUDIO!5e0!3m2!1sen!2sin!4v1795369828417!5m2!1sen!2sin",
       },
@@ -135,7 +135,7 @@ export const siteConfig = {
     title: "Founder & Lead Custom Artist",
     bio: [
       "Trained in classical fine arts before dedicating his life to the ritual needle. Joo draws inspiration from sacred geometric mandalas, gothic linework, dark mythology, and ancient iconography.",
-      "Every piece inked at Mad Monk Tattoo is custom-designed from scratch—never cloned from Pinterest, never repeated. Joo works one-on-one with clients across both our Coimbatore and Palangarai (Avinashi) studios in a quiet, zero-distraction sanctuary where each stroke is deliberate and permanent.",
+      "Every piece inked at Mad Monk Tattoo is custom-designed from scratch—never cloned from Pinterest, never repeated. Joo works one-on-one with clients across both our Malumichampatti (Coimbatore) and Palangarai (Avinashi) studios in a quiet, zero-distraction sanctuary where each stroke is deliberate and permanent.",
     ],
     stats: [
       { label: "Years of Craft", value: "5+ years" },
@@ -385,13 +385,15 @@ export const siteConfig = {
   ] as FAQItem[],
 
   seo: {
-    title: "Mad Monk Tattoo | Custom Tattoo Studio in Coimbatore & Avinashi, Tamil Nadu",
+    title: "Mad Monk Tattoo | Custom Tattoo Studio in Malumichampatti, Coimbatore & Palangarai, Avinashi",
     description:
-      "Bespoke custom tattoos, sacred linework, dark geometric mandalas, fine-line and cover-ups by Mad Monk Tattoo Studio in Coimbatore and Palangarai (Avinashi), Tamil Nadu. Book your private session.",
+      "Bespoke custom tattoos, sacred linework, dark geometric mandalas, fine-line and cover-ups by Mad Monk Tattoo Studio in Malumichampatti (Coimbatore) and Palangarai (Avinashi), Tamil Nadu. Book your private session.",
     keywords: [
       "Mad Monk Tattoo Studio",
+      "tattoo studio Malumichampatti",
       "tattoo studio Coimbatore",
       "best tattoo artist Coimbatore",
+      "tattoo artist Malumichampatti",
       "tattoo studio Avinashi",
       "tattoo studio Palangarai",
       "tattoo studio Tirupur",
