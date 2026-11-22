@@ -47,7 +47,7 @@ export default function Styles() {
                     alt={style.title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover transform transition-transform duration-700 group-hover:scale-105 filter grayscale contrast-125"
+                    className="object-cover transform transition-transform duration-700 group-hover:scale-105 filter grayscale contrast-110 group-hover:grayscale-0"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
                   
