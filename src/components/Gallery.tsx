@@ -13,139 +13,145 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Gallery() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  // Triple the items for infinite seamless looping
   const originalItems = images.gallery;
   const N = originalItems.length; // 10
-  const clonedItems = [...originalItems, ...originalItems, ...originalItems]; // 30 items
 
-  // State
-  const [currentIndex, setCurrentIndex] = useState(N); // Start at index 10 (middle set)
+  // 3 complete sets for seamless infinite looping:
+  // Set 0 (0..9), Set 1 (10..19, active home range), Set 2 (20..29)
+  const clonedItems = [...originalItems, ...originalItems, ...originalItems];
+
+  // Responsive breakpoint configuration
+  // Desktop: 4 cards visible + partial edge peeks
+  // Tablet: 2 cards visible + partial edge peeks
+  // Mobile: 1 card visible + partial edge peeks
+  const [breakpoint, setBreakpoint] = useState<"mobile" | "tablet" | "desktop">(
+    "desktop"
+  );
+
+  const [currentIndex, setCurrentIndex] = useState(N); // Start at index 10 (home set)
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  // Container dimensions & layout metrics
-  const [containerWidth, setContainerWidth] = useState(1200);
-  const [isMounted, setIsMounted] = useState(false);
-
-  // Drag state (Pointer Events for unified desktop mouse & mobile touch)
+  // Drag interaction state
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const hasDraggedRef = useRef(false);
+  const isResettingRef = useRef(false);
 
-  // Compute responsive layout
-  // Desktop: 4 full cards in view + partial peek on left and right
-  // Tablet: 2 full cards in view + partial peek on left and right
-  // Mobile: 1 full card in view + partial peek on left and right
-  let visibleCards = 4;
-  let peekFraction = 0.22;
-  let gap = 20;
+  // Responsive configuration in percentages (Zero pixel dependency = Zero blank screens)
+  const layoutConfig = {
+    mobile: {
+      cardWidthPercent: 74,
+      gapPercent: 4,
+      leftOffsetPercent: 9,
+      stepPercent: 78,
+    },
+    tablet: {
+      cardWidthPercent: 44,
+      gapPercent: 3,
+      leftOffsetPercent: 4.5,
+      stepPercent: 47,
+    },
+    desktop: {
+      cardWidthPercent: 21.5,
+      gapPercent: 1.5,
+      leftOffsetPercent: 4,
+      stepPercent: 23,
+    },
+  }[breakpoint];
 
-  if (containerWidth < 640) {
-    visibleCards = 1;
-    peekFraction = 0.16;
-    gap = 14;
-  } else if (containerWidth < 1024) {
-    visibleCards = 2;
-    peekFraction = 0.2;
-    gap = 18;
-  } else {
-    visibleCards = 4;
-    peekFraction = 0.22;
-    gap = 20;
-  }
-
-  const totalGaps = visibleCards + 1;
-  const cardWidth = Math.max(
-    180,
-    (containerWidth - totalGaps * gap) / (visibleCards + 2 * peekFraction)
-  );
-  const cardPeek = peekFraction * cardWidth;
-  const leftOffset = cardPeek + gap;
-
-  // Track container width on mount and resize
+  // Track responsive breakpoints safely
   useEffect(() => {
-    setIsMounted(true);
-    const updateWidth = () => {
-      if (containerRef.current) {
-        setContainerWidth(containerRef.current.offsetWidth);
+    const handleResize = () => {
+      const w = window.innerWidth;
+      if (w < 640) {
+        setBreakpoint("mobile");
+      } else if (w < 1024) {
+        setBreakpoint("tablet");
+      } else {
+        setBreakpoint("desktop");
       }
     };
-    updateWidth();
 
-    let resizeTimer: NodeJS.Timeout;
-    const handleResize = () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(updateWidth, 100);
-    };
-
+    handleResize();
     window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      clearTimeout(resizeTimer);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Slide navigation
+  // Safe navigation forward with seamless loop boundary wrap
   const handleNext = useCallback(() => {
+    if (isResettingRef.current) return;
     setIsTransitioning(true);
-    setCurrentIndex((prev) => prev + 1);
-  }, []);
 
+    setCurrentIndex((prev) => {
+      const next = prev + 1;
+
+      // When advancing past set 1 into set 2 (e.g. index 20):
+      if (next >= 2 * N) {
+        isResettingRef.current = true;
+        // Allow the smooth 500ms slide animation into index 20 to complete,
+        // then invisibly snap back to index 10 without animation.
+        setTimeout(() => {
+          setIsTransitioning(false);
+          setCurrentIndex(N);
+          setTimeout(() => {
+            setIsTransitioning(true);
+            isResettingRef.current = false;
+          }, 40);
+        }, 500);
+      }
+
+      return next;
+    });
+  }, [N]);
+
+  // Safe navigation backward with seamless loop boundary wrap
   const handlePrev = useCallback(() => {
+    if (isResettingRef.current) return;
     setIsTransitioning(true);
-    setCurrentIndex((prev) => prev - 1);
-  }, []);
 
-  const handleJumpTo = useCallback(
-    (index: number) => {
-      setIsTransitioning(true);
-      setCurrentIndex(N + index);
-    },
-    [N]
-  );
+    setCurrentIndex((prev) => {
+      const next = prev - 1;
 
-  // Infinite loop boundary reset
-  const handleTransitionEnd = () => {
-    if (currentIndex >= 2 * N) {
-      // Reached the end of the second set, quietly jump back to first set
-      setIsTransitioning(false);
-      setCurrentIndex((prev) => prev - N);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setIsTransitioning(true);
-        });
-      });
-    } else if (currentIndex < N) {
-      // Reached before the second set, quietly jump to third set
-      setIsTransitioning(false);
-      setCurrentIndex((prev) => prev + N);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setIsTransitioning(true);
-        });
-      });
-    }
+      // When retreating past set 1 into set 0 (e.g. index 9):
+      if (next < N) {
+        isResettingRef.current = true;
+        setTimeout(() => {
+          setIsTransitioning(false);
+          setCurrentIndex(2 * N - 1);
+          setTimeout(() => {
+            setIsTransitioning(true);
+            isResettingRef.current = false;
+          }, 40);
+        }, 500);
+      }
+
+      return next;
+    });
+  }, [N]);
+
+  // Jump to specific dot
+  const handleJumpTo = (dotIndex: number) => {
+    if (isResettingRef.current) return;
+    setIsTransitioning(true);
+    setCurrentIndex(N + dotIndex);
   };
 
-  // Auto-slide effect (Smooth 3.2s interval, pauses on hover / drag / modal)
+  // Auto-slide effect (Smooth 3.4s interval, pauses on hover / drag / lightbox)
   useEffect(() => {
     if (isPaused || isDragging || selectedIndex !== null) return;
 
     const timer = setInterval(() => {
       handleNext();
-    }, 3200);
+    }, 3400);
 
     return () => clearInterval(timer);
   }, [isPaused, isDragging, selectedIndex, handleNext]);
 
-  // Pointer drag handlers (Mouse & Touch unified)
+  // Pointer drag events (Mouse & Touch unified)
   const handlePointerDown = (e: React.PointerEvent) => {
-    // Only primary mouse button or touch
     if (e.button !== 0 && e.pointerType === "mouse") return;
     setIsDragging(true);
     setDragStartX(e.clientX);
@@ -168,10 +174,9 @@ export default function Gallery() {
     setIsDragging(false);
     setIsPaused(false);
 
-    const threshold = Math.min(60, cardWidth * 0.25);
-    if (dragOffset < -threshold) {
+    if (dragOffset < -50) {
       handleNext();
-    } else if (dragOffset > threshold) {
+    } else if (dragOffset > 50) {
       handlePrev();
     }
 
@@ -189,9 +194,9 @@ export default function Gallery() {
   };
 
   // Lightbox handlers
-  const openLightbox = (idx: number) => {
+  const openLightbox = (originalIndex: number) => {
     if (hasDraggedRef.current) return;
-    setSelectedIndex(idx % N);
+    setSelectedIndex(originalIndex);
     document.body.style.overflow = "hidden";
   };
 
@@ -226,10 +231,11 @@ export default function Gallery() {
   const activeTattoo =
     selectedIndex !== null ? originalItems[selectedIndex] : null;
 
-  // Track transform calculation
-  const translateX = isMounted
-    ? leftOffset - currentIndex * (cardWidth + gap) + dragOffset
-    : 0;
+  // Track transform percentage formula:
+  // offset - (index * step) + dragOffset in px
+  const transformStyle = `translate3d(calc(${layoutConfig.leftOffsetPercent}% - ${
+    currentIndex * layoutConfig.stepPercent
+  }% + ${dragOffset}px), 0, 0)`;
 
   return (
     <section
@@ -283,7 +289,6 @@ export default function Gallery() {
 
       {/* Outer Slider Container (Edge-to-Edge with Peeking Cards) */}
       <div
-        ref={containerRef}
         className="relative w-full overflow-hidden select-none touch-pan-y"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
@@ -317,17 +322,14 @@ export default function Gallery() {
           <ChevronRight className="w-5 h-5" />
         </button>
 
-        {/* Sliding Track (CSS Transform with Hardware Acceleration) */}
+        {/* Sliding Track (100% Percentage Based, SSR-safe, Hardware Accelerated) */}
         <div
-          ref={trackRef}
-          onTransitionEnd={handleTransitionEnd}
           style={{
-            transform: `translate3d(${translateX}px, 0, 0)`,
+            transform: transformStyle,
             transition:
               isTransitioning && !isDragging
-                ? "transform 550ms cubic-bezier(0.25, 1, 0.5, 1)"
+                ? "transform 500ms cubic-bezier(0.25, 1, 0.5, 1)"
                 : "none",
-            gap: `${gap}px`,
           }}
           className={`flex items-center py-6 will-change-transform ${
             isDragging ? "cursor-grabbing" : "cursor-grab"
@@ -341,7 +343,8 @@ export default function Gallery() {
               <div
                 key={`${tattoo.id}-${index}`}
                 style={{
-                  width: `${cardWidth}px`,
+                  width: `${layoutConfig.cardWidthPercent}%`,
+                  marginRight: `${layoutConfig.gapPercent}%`,
                   flexShrink: 0,
                 }}
                 onClick={() => openLightbox(originalIndex)}
@@ -365,7 +368,7 @@ export default function Gallery() {
                   {/* Gradient Overlay for Typography Readability */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
 
-                  {/* Badge */}
+                  {/* Featured Badge */}
                   {isFeatured && (
                     <div className="absolute top-3 right-3 px-2 py-0.5 bg-blood text-white text-[9px] font-mono uppercase tracking-widest font-semibold shadow-md">
                       Featured
