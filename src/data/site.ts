@@ -131,11 +131,11 @@ export const siteConfig = {
   },
 
   artist: {
-    name: "Vikram \"Monk\" Dev",
+    name: "Joo",
     title: "Founder & Lead Custom Artist",
     bio: [
-      "Trained in classical fine arts before dedicating his life to the ritual needle. Vikram draws inspiration from sacred geometric mandalas, gothic linework, dark mythology, and ancient iconography.",
-      "Every piece inked at Mad Monk Tattoo is custom-designed from scratch—never cloned from Pinterest, never repeated. Vikram works one-on-one with clients across both our Coimbatore and Palangarai (Avinashi) studios in a quiet, zero-distraction sanctuary where each stroke is deliberate and permanent.",
+      "Trained in classical fine arts before dedicating his life to the ritual needle. Joo draws inspiration from sacred geometric mandalas, gothic linework, dark mythology, and ancient iconography.",
+      "Every piece inked at Mad Monk Tattoo is custom-designed from scratch—never cloned from Pinterest, never repeated. Joo works one-on-one with clients across both our Coimbatore and Palangarai (Avinashi) studios in a quiet, zero-distraction sanctuary where each stroke is deliberate and permanent.",
     ],
     stats: [
       { label: "Years of Craft", value: "5+ years" },
@@ -214,7 +214,7 @@ export const siteConfig = {
       title: "Custom Design",
       subtitle: "Bespoke Linework",
       description:
-        "Vikram drafts an original, tailor-made stencil crafted specifically for your skin curvature. You review the mockups, tweak elements, and approve before needle meets skin.",
+        "Joo drafts an original, tailor-made stencil crafted specifically for your skin curvature. You review the mockups, tweak elements, and approve before needle meets skin.",
     },
     {
       number: "03",
@@ -323,7 +323,7 @@ export const siteConfig = {
       tattooType: "Geometric Mandala Half-Sleeve",
       rating: 5,
       quote:
-        "Vikram didn't just tattoo me; he listened to the grief and renewal story behind it and drafted something breathtaking. The studio was dead quiet, clinical, and meditative. The linework after 6 months is still pitch-black and surgical.",
+        "Joo didn't just tattoo me; he listened to the grief and renewal story behind it and drafted something breathtaking. The studio was dead quiet, clinical, and meditative. The linework after 6 months is still pitch-black and surgical.",
     },
     {
       id: "review-2",
@@ -341,7 +341,7 @@ export const siteConfig = {
       tattooType: "Blackwork Cover-up",
       rating: 5,
       quote:
-        "Had a hideous 10-year-old tribal piece that three other studios refused to touch. Vikram designed a dark neo-traditional blackwork raven that completely consumed the old scar. Absolutely legendary work.",
+        "Had a hideous 10-year-old tribal piece that three other studios refused to touch. Joo designed a dark neo-traditional blackwork raven that completely consumed the old scar. Absolutely legendary work.",
     },
   ] as Testimonial[],
 

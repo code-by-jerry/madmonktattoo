@@ -85,7 +85,7 @@ export default function FAQ() {
             rel="noopener noreferrer"
             className="text-blood hover:underline font-mono uppercase tracking-wider"
           >
-            Chat directly with Vikram on WhatsApp →
+            Chat directly with Joo on WhatsApp →
           </a>
         </div>
       </div>

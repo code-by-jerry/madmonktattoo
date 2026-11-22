@@ -21,7 +21,7 @@ export default function WhatsAppFloat() {
         }`}
       >
         <span className="text-xs font-mono tracking-wider">
-          Chat with Vikram <span className="text-blood">• Fast Reply</span>
+          Chat with Joo <span className="text-blood">• Fast Reply</span>
         </span>
       </div>
 

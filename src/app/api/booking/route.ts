@@ -83,7 +83,7 @@ export async function POST(request: Request) {
     // TODO: Wire up your external notification channels here:
     // -------------------------------------------------------------------------
     // 1. Email Notification:
-    //    Use Resend, SendGrid, or Nodemailer to send an email alert to Vikram
+    //    Use Resend, SendGrid, or Nodemailer to send an email alert to Joo
     //    Example:
     //    await resend.emails.send({
     //      from: 'Mad Monk Studio <bookings@madmonktattoo.com>',
@@ -103,7 +103,7 @@ export async function POST(request: Request) {
       {
         success: true,
         message:
-          "Booking request received successfully! Vikram will review your concept and reach out via WhatsApp.",
+          "Booking request received successfully! Joo will review your concept and reach out via WhatsApp.",
         clientName: bookingData.fullName,
       },
       { status: 200 }

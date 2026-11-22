@@ -61,7 +61,7 @@ const SIZE_OPTIONS = [
   "Medium (Approx 4 × 5 inches)",
   "Large (Approx 6 × 8 inches / Half-Sleeve)",
   "Full Placement (Full Sleeve, Backplate, Chest)",
-  "Not sure yet (Need Vikram's guidance)",
+  "Not sure yet (Need Joo's guidance)",
 ];
 
 const STYLE_OPTIONS = [
@@ -73,7 +73,7 @@ const STYLE_OPTIONS = [
   "Cover-up (Rework existing tattoo)",
   "Religious / Spiritual / Vedic Iconography",
   "Small & Minimalist Sigil",
-  "Undecided / Open to Vikram's recommendation",
+  "Undecided / Open to Joo's recommendation",
 ];
 
 const STUDIO_OPTIONS = [
@@ -227,7 +227,7 @@ export default function BookingForm() {
             Request A Custom Session
           </h2>
           <p className="mt-4 text-theme-text-secondary text-sm sm:text-base font-light tracking-wide max-w-xl mx-auto">
-            Fill in your concept details below. Vikram reviews every inquiry personally and responds within 24 hours.
+            Fill in your concept details below. Joo reviews every inquiry personally and responds within 24 hours.
           </p>
         </div>
 
@@ -239,7 +239,7 @@ export default function BookingForm() {
               Request Received
             </h3>
             <p className="mt-3 text-theme-text-secondary text-sm sm:text-base max-w-lg mx-auto leading-relaxed font-light">
-              Thank you for reaching out. Vikram has received your tattoo inquiry and will connect with you on WhatsApp shortly with initial thoughts and scheduling availability.
+              Thank you for reaching out. Joo has received your tattoo inquiry and will connect with you on WhatsApp shortly with initial thoughts and scheduling availability.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
