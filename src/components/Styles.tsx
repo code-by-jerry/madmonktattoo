@@ -8,7 +8,10 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function Styles() {
   return (
-    <section id="styles" className="py-24 relative bg-theme-surface/40 border-t border-theme-border transition-colors duration-300">
+    <section
+      id="styles"
+      className="py-24 relative bg-theme-surface/40 border-t border-theme-border transition-colors duration-300"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -19,16 +22,16 @@ export default function Styles() {
             Custom Tattoo Styles
           </h2>
           <p className="mt-4 text-theme-text-secondary text-sm sm:text-base font-light tracking-wide">
-            From single-needle delicate sacred scripts to heavy blackwork armor. We specialize in custom compositions tailored to anatomical muscle lines.
+            From single-needle delicate sacred scripts to heavy blackwork armor and hyper-realistic portraits. We specialize in custom compositions tailored to anatomical muscle lines.
           </p>
         </div>
 
-        {/* 8 Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 7 Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {siteConfig.styles.map((style, index) => {
             const styleImg = images.styles[style.id] || {
               src: `/placeholders/style-${style.id}.svg`,
-              alt: style.title,
+              alt: `${style.title} tattoo style by Mad Monk Tattoo`,
             };
 
             return (
@@ -41,16 +44,16 @@ export default function Styles() {
                 className="group relative flex flex-col bg-theme-card border border-theme-border hover:border-blood/70 transition-all duration-300 overflow-hidden shadow-md"
               >
                 {/* Image Aspect Box */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-dark">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-black">
                   <Image
                     src={styleImg.src}
-                    alt={style.title}
+                    alt={styleImg.alt || style.title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     className="object-cover transform transition-transform duration-700 group-hover:scale-105 filter grayscale contrast-110 group-hover:grayscale-0"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                  
+
                   {/* Style number badge */}
                   <span className="absolute top-3 left-3 px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest bg-black/80 border border-white/20 text-white">
                     0{index + 1}

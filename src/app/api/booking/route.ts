@@ -29,16 +29,19 @@ const bookingSchema = z.object({
   website: z.string().max(0, "Bot detected").optional(),
 });
 
+const noIndexHeaders = {
+  "X-Robots-Tag": "noindex, nofollow",
+};
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
 
     // 1. Honeypot verification: if filled, quietly reject bot submission
     if (body.website && body.website.length > 0) {
-      console.warn("[Spam Blocked] Honeypot field triggered:", body.website);
       return NextResponse.json(
         { error: "Invalid submission detected." },
-        { status: 400 }
+        { status: 400, headers: noIndexHeaders }
       );
     }
 
@@ -50,7 +53,7 @@ export async function POST(request: Request) {
           error: "Validation failed",
           details: validationResult.error.flatten().fieldErrors,
         },
-        { status: 422 }
+        { status: 422, headers: noIndexHeaders }
       );
     }
 
@@ -67,7 +70,7 @@ export async function POST(request: Request) {
     const customWhatsAppMsg = [
       "🔥 *NEW TATTOO ENQUIRY // MAD MONK STUDIO*",
       "",
-      "Hi Joo, I would like to book a custom tattoo consultation. Here are my details:",
+      "Hi Midnight, I would like to book a custom tattoo consultation. Here are my details:",
       "",
       `👤 *Name:* ${bookingData.fullName}`,
       `📱 *Phone / WhatsApp:* ${bookingData.phone}`,
@@ -85,34 +88,20 @@ export async function POST(request: Request) {
       customWhatsAppMsg
     )}`;
 
-    // 3. Log booking request in server console
-    console.log("=========================================");
-    console.log("📩 NEW INCOMING TATTOO BOOKING REQUEST");
-    console.log("Timestamp:", new Date().toISOString());
-    console.log("Client Name:", bookingData.fullName);
-    console.log("Phone / WhatsApp:", bookingData.phone);
-    console.log("Placement:", bookingData.placement);
-    console.log("Preferred Studio:", studioText);
-    console.log("Preferred Date:", dateText);
-    console.log("Tattoo Concept / Idea:\n", ideaText);
-    console.log("WhatsApp Deep Link:\n", customWhatsAppUrl);
-    console.log("=========================================");
-
     return NextResponse.json(
       {
         success: true,
         message:
-          "Booking request received successfully! Joo will review your concept and connect on WhatsApp.",
+          "Booking request received successfully! Midnight will review your concept and connect on WhatsApp.",
         clientName: bookingData.fullName,
         whatsappUrl: customWhatsAppUrl,
       },
-      { status: 200 }
+      { status: 200, headers: noIndexHeaders }
     );
-  } catch (error) {
-    console.error("[Booking API Error]:", error);
+  } catch {
     return NextResponse.json(
       { error: "Internal server error processing booking." },
-      { status: 500 }
+      { status: 500, headers: noIndexHeaders }
     );
   }
 }

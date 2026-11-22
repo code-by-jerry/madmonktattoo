@@ -168,7 +168,7 @@ NEXT_PUBLIC_SITE_URL=https://madmonktattoo.com
 
 ---
 
-## 🚀 5. Deploying to Vercel
+## 🚀 5. Deploying to Vercel & Domain Routing
 
 This project is built 100% standard Next.js 15 (App Router) without custom servers or client-side Node dependencies, making it zero-config deployable on Vercel:
 
@@ -177,4 +177,10 @@ This project is built 100% standard Next.js 15 (App Router) without custom serve
 3. Import the repository.
 4. Framework Preset will auto-detect as **Next.js**.
 5. Click **"Deploy"**.
-6. (Optional) Add your custom domain under **Project Settings > Domains**.
+
+### Domain & WWW Redirect Configuration
+- **Canonical Primary Domain**: `https://madmonktattoo.online`
+- **WWW Domain Redirect**: Under **Project Settings > Domains** in Vercel:
+  - Add `madmonktattoo.online` as the **Primary Domain**
+  - Add `www.madmonktattoo.online` with status **Redirect to madmonktattoo.online (308 Permanent Redirect)**
+  - This ensures all traffic is automatically consolidated to the canonical non-www domain, avoiding duplicate content issues and maintaining SEO link equity.

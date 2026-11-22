@@ -1,16 +1,24 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
-import Gallery from "@/components/Gallery";
-import Styles from "@/components/Styles";
-import Artist from "@/components/Artist";
-import Process from "@/components/Process";
-import Pricing from "@/components/Pricing";
-import Testimonials from "@/components/Testimonials";
-import BookingForm from "@/components/BookingForm";
-import FAQ from "@/components/FAQ";
+import JsonLd from "@/components/JsonLd";
+
+// Dynamic imports for below-the-fold components to maximize Core Web Vitals
+const Gallery = dynamic(() => import("@/components/Gallery"));
+const Styles = dynamic(() => import("@/components/Styles"));
+const Artist = dynamic(() => import("@/components/Artist"));
+const Process = dynamic(() => import("@/components/Process"));
+const Pricing = dynamic(() => import("@/components/Pricing"));
+const Testimonials = dynamic(() => import("@/components/Testimonials"));
+const ServingLocations = dynamic(() => import("@/components/ServingLocations"));
+const BookingForm = dynamic(() => import("@/components/BookingForm"));
+const FAQ = dynamic(() => import("@/components/FAQ"));
 
 export default function Home() {
   return (
     <>
+      {/* 1. Structured Data JSON-LD (TattooParlor, FAQPage, WebSite) */}
+      <JsonLd />
+
       {/* 2. Hero */}
       <Hero />
 
@@ -26,16 +34,19 @@ export default function Home() {
       {/* 6. Process */}
       <Process />
 
-      {/* 7. Offers & Pricing */}
+      {/* 7. Offers & Sessions */}
       <Pricing />
 
       {/* 8. Testimonials */}
       <Testimonials />
 
-      {/* 9. Booking Request Form */}
+      {/* 9. Serving Coimbatore & Tirupur */}
+      <ServingLocations />
+
+      {/* 10. Booking Request Form */}
       <BookingForm />
 
-      {/* 10. FAQ */}
+      {/* 11. FAQ */}
       <FAQ />
     </>
   );

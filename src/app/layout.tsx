@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Cinzel } from "next/font/google";
 import "./globals.css";
-import { siteConfig } from "@/data/site";
 import { seoData } from "@/data/seo";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -42,49 +41,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // LocalBusiness Structured Data JSON-LD Schema
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "TattooParlor",
-    "name": siteConfig.brand.name,
-    "image": `${seoData.domain}/og-image.jpg`,
-    "description": seoData.description,
-    "telephone": siteConfig.contact.phone,
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Malumichampatti, Coimbatore & Palangarai, Avinashi",
-      "addressLocality": "Malumichampatti, Coimbatore",
-      "addressRegion": "Tamil Nadu",
-      "postalCode": "641001",
-      "addressCountry": "IN",
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 10.902425,
-      "longitude": 76.693668,
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ],
-        "opens": "09:00",
-        "closes": "23:00",
-      },
-    ],
-    "sameAs": [
-      siteConfig.contact.instagramUrl,
-      siteConfig.contact.whatsappUrl,
-    ],
-  };
-
   return (
     <html lang="en" className={`${inter.variable} ${cinzel.variable} light`} suppressHydrationWarning>
       <head>
@@ -108,10 +64,6 @@ export default function RootLayout({
               })();
             `,
           }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className="min-h-screen bg-theme-bg text-theme-text-primary antialiased selection:bg-blood selection:text-white transition-colors duration-300" suppressHydrationWarning>

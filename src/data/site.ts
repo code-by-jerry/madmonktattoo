@@ -75,7 +75,8 @@ export interface FAQItem {
 
 export const siteConfig = {
   brand: {
-    name: "Mad Monk Tattoo",
+    name: "Mad Monk Tattoo Studio",
+    shortName: "Mad Monk Tattoo",
     wordmarkPrefix: "MAD",
     wordmarkSuffix: "MONK",
     submark: "CUSTOM TATTOO STUDIO",
@@ -97,7 +98,7 @@ export const siteConfig = {
     whatsapp: "+919080937352",
     whatsappDisplay: "+91 90809 37352",
     whatsappMessage:
-      "Hi Mad Monk Tattoo, I would like to inquire about booking a custom tattoo session.",
+      "Hi Midnight, I would like to inquire about booking a custom tattoo session at Mad Monk Tattoo.",
     get whatsappUrl() {
       return `https://wa.me/${this.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
         this.whatsappMessage
@@ -131,11 +132,11 @@ export const siteConfig = {
   },
 
   artist: {
-    name: "Joo",
+    name: "Midnight",
     title: "Founder & Lead Custom Artist",
     bio: [
-      "Trained in classical fine arts before dedicating his life to the ritual needle. Joo draws inspiration from sacred geometric mandalas, gothic linework, dark mythology, and ancient iconography.",
-      "Every piece inked at Mad Monk Tattoo is custom-designed from scratch—never cloned from Pinterest, never repeated. Joo works one-on-one with clients across both our Malumichampatti (Coimbatore) and Palangarai (Avinashi) studios in a quiet, zero-distraction sanctuary where each stroke is deliberate and permanent.",
+      "Mad Monk Tattoo is a premier private tattoo studio in Coimbatore, also proudly serving Tirupur and Avinashi with uncompromising dedication to the craft. Founded by Midnight, our sanctuary specializes in custom, realistic, and portrait tattoos created exclusively through one-on-one rituals.",
+      "With over 5+ years of dedicated studio experience and hundreds of custom permanent tattoo pieces inked, Midnight approaches every design as an intimate collaboration with your anatomy. We reject generic flash art in favor of authentic storytelling, rendering hyper-detailed realism, fine-needle portraits, and heavy sacred blackwork in a tranquil, clinical-grade setting. Whether you are getting your first tattoo or an extensive full-day composition, experience timeless artistry engineered to live with you forever.",
     ],
     stats: [
       { label: "Years of Craft", value: "5+ Years" },
@@ -147,56 +148,62 @@ export const siteConfig = {
   navLinks: [
     { label: "Home", href: "#" },
     { label: "Work", href: "#work" },
+    { label: "Styles", href: "#styles" },
+    { label: "Process", href: "#process" },
+    { label: "Locations", href: "#locations" },
+    { label: "FAQ", href: "#faq" },
     { label: "Contact", href: "#booking" },
   ] as NavLink[],
 
+  // 7 Styles with 30-40 words descriptive paragraphs each
   styles: [
+    {
+      id: "portrait",
+      title: "Portrait",
+      description:
+        "Lifelike portrait tattoos capturing loved ones, icons, and historical figures with hyper-accurate tonal depth. Midnight meticulously maps every facial contour, expressive shadow, and highlight to deliver an emotional, enduring homage with flawless skin transitions.",
+      imageKey: "stylePortrait",
+    },
+    {
+      id: "realistic",
+      title: "Realistic",
+      description:
+        "High-definition realism combining three-dimensional lighting, fluid gradients, and photographic depth in rich black and grey inks. Each piece replicates organic textures, wildlife, architecture, and sacred statues that appear carved directly into your skin.",
+      imageKey: "styleRealistic",
+    },
     {
       id: "blackwork",
       title: "Blackwork",
-      description: "Bold solid blacks, high contrast graphic motifs and intense saturation that commands presence.",
+      description:
+        "Dense obsidian saturation, high-contrast graphic geometry, and sacred ornamental armor designed around natural muscle flow. Engineered with deep carbon blacks for dramatic presence, bold structural silhouettes, and lifelong intensity that never fades into ambiguity.",
       imageKey: "styleBlackwork",
-    },
-    {
-      id: "linework",
-      title: "Linework",
-      description: "Razor-sharp contours, anatomical flow, and illustrative elegance without unnecessary shading.",
-      imageKey: "styleLinework",
     },
     {
       id: "fine-line",
       title: "Fine Line",
-      description: "Delicate single-needle craftsmanship, micro-details, and refined whispering permanence.",
+      description:
+        "Micro-needle precision delivering delicate botanical illustrations, razor-sharp architectural geometry, and whispering typographical scripts. Crafted with surgical gentleness for collectors who appreciate understated luxury, zero blowout risk, and airy, sophisticated permanence.",
       imageKey: "styleFineLine",
     },
     {
-      id: "geometric",
-      title: "Geometric",
-      description: "Sacred geometry, intricate mandalas, dotwork (stippling) and mathematical precision.",
-      imageKey: "styleGeometric",
+      id: "custom",
+      title: "Custom / Customized",
+      description:
+        "One-of-a-kind bespoke tattoo compositions drafted from scratch to reflect your personal story and anatomy. Midnight conducts deep conceptual consultations, crafting original stencils with zero replicated templates—ensuring your ink remains strictly unique in the world.",
+      imageKey: "styleCustom",
     },
     {
-      id: "realism",
-      title: "Realism",
-      description: "High-fidelity micro-textures, cinematic shadows, and lifelike portraits in deep black and grey.",
-      imageKey: "styleRealism",
+      id: "cover-up",
+      title: "Cover-up",
+      description:
+        "Transformative cover-up solutions that intelligently camouflage faded, aged, or unwanted ink into breathtaking new masterpieces. Using strategic deep shading, dimensional textures, and artistic redirection, we restore skin confidence with zero trace of old regrets.",
+      imageKey: "styleCoverup",
     },
     {
-      id: "cover-ups",
-      title: "Cover-ups",
-      description: "Masterful spatial redesigns transforming faded or regretful ink into breathtaking new art.",
-      imageKey: "styleCoverups",
-    },
-    {
-      id: "religious-spiritual",
-      title: "Religious / Spiritual",
-      description: "Vedic scriptures, deities, yantras, and symbolic talismans with spiritual gravity.",
-      imageKey: "styleSpiritual",
-    },
-    {
-      id: "small-minimal",
-      title: "Small & Minimal",
-      description: "Understated personal emblems, micro-sigils, and minimalist statements engineered for longevity.",
+      id: "minimal",
+      title: "Minimal",
+      description:
+        "Subtle, meaningful micro-tattoos and elemental sigils stripped of unnecessary excess. Featuring clean, intentional linework and balanced placement, our minimalist pieces make a quiet yet profound statement designed to retain crisp clarity over decades.",
       imageKey: "styleMinimal",
     },
   ] as TattooStyle[],
@@ -214,7 +221,7 @@ export const siteConfig = {
       title: "Custom Design",
       subtitle: "Bespoke Linework",
       description:
-        "Joo drafts an original, tailor-made stencil crafted specifically for your skin curvature. You review the mockups, tweak elements, and approve before needle meets skin.",
+        "Midnight drafts an original, tailor-made stencil crafted specifically for your skin curvature. You review the mockups, tweak elements, and approve before needle meets skin.",
     },
     {
       number: "03",
@@ -296,11 +303,11 @@ export const siteConfig = {
       },
     ] as SessionTier[],
     offer: {
-      badge: "Launch Month Special",
-      headline: "Launch Month Offer",
+      badge: "Consultation Special",
+      headline: "Free Design Consultation",
       description:
         "Book a consultation this month and get a free custom design sketch. Limited slots.",
-      cta: "Claim Offer →",
+      cta: "Claim Free Consult →",
       offerEndDate: "2026-12-31",
       offerEndDisplay: "Limited monthly slots available",
       note: "No hidden costs. Final quote shared after consultation.",
@@ -320,10 +327,10 @@ export const siteConfig = {
       id: "review-1",
       client: "Kabir S.",
       location: "Coimbatore",
-      tattooType: "Geometric Mandala Half-Sleeve",
+      tattooType: "Realistic Portrait & Shading",
       rating: 5,
       quote:
-        "Joo didn't just tattoo me; he listened to the grief and renewal story behind it and drafted something breathtaking. The studio was dead quiet, clinical, and meditative. The linework after 6 months is still pitch-black and surgical.",
+        "Midnight didn't just tattoo me; he listened to the grief and renewal story behind it and drafted something breathtaking. The studio was dead quiet, clinical, and meditative. The realism linework after 6 months is still pitch-black and surgical.",
     },
     {
       id: "review-2",
@@ -338,70 +345,62 @@ export const siteConfig = {
       id: "review-3",
       client: "Rohan D.",
       location: "Coimbatore",
-      tattooType: "Blackwork Cover-up",
+      tattooType: "Custom Blackwork Cover-up",
       rating: 5,
       quote:
-        "Had a hideous 10-year-old tribal piece that three other studios refused to touch. Joo designed a dark neo-traditional blackwork raven that completely consumed the old scar. Absolutely legendary work.",
+        "Had a faded 10-year-old piece that other studios refused to touch. Midnight designed a bespoke dark neo-traditional blackwork raven that completely transformed the area. Absolutely legendary work.",
     },
   ] as Testimonial[],
 
+  // 8 FAQs: 40-70 words each, no prices
   faqs: [
     {
-      id: "pain",
-      question: "How much does a tattoo actually hurt?",
+      id: "location",
+      question: "Where is the studio located?",
       answer:
-        "Pain is subjective and varies by placement. Fleshy areas like outer arms, forearms, and thighs feel like a scratchy vibration, while bony or thin-skinned spots (ribs, spine, ankles) have more bite. We take regular breathing pauses and maintain a relaxed, calm atmosphere so you stay comfortable.",
+        "Mad Monk Tattoo operates two dedicated private studio spaces in Tamil Nadu: one in Malumichampatti, Coimbatore (off Pollachi Main Road) and one in Palangarai, Avinashi (serving Tirupur and surrounding districts). Both locations are strictly by prior appointment to maintain complete privacy, individualized attention, and a serene atmosphere for every client.",
+    },
+    {
+      id: "serve-tirupur",
+      question: "Do you serve Tirupur?",
+      answer:
+        "Yes, we actively serve clients from Tirupur, Tiruppur textile district, and nearby towns. Our Palangarai studio in Avinashi is located just a short 15 to 20-minute drive from central Tirupur along the main highway, making it convenient for consultations, custom stencil approvals, and extended tattoo sessions without traveling far into city congestion.",
+    },
+    {
+      id: "portrait-realistic",
+      question: "Do you specialize in realistic and portrait tattoos?",
+      answer:
+        "Midnight specializes extensively in realistic and portrait tattoos using high-definition black and grey shading techniques. Whether commemorating a family member, a sacred icon, or a cinematic figure, each portrait is prepared with comprehensive anatomical reference mapping and micro-needle tonal blending to ensure lifelike expression and smooth, enduring skin transitions.",
+    },
+    {
+      id: "session-duration",
+      question: "How long does a session take?",
+      answer:
+        "Session length depends on your design’s scale, detail density, and placement. Minimal fine-line tattoos typically take 1 to 2 hours, half-day custom compositions run between 4 and 5 hours, while full-scale realism sleeves or backplates require full-day sessions of 7 to 8 hours. We always build in comfortable hydration and breathing breaks.",
     },
     {
       id: "aftercare",
-      question: "How do I care for my tattoo during healing?",
+      question: "What is the recommended tattoo aftercare?",
       answer:
-        "We apply medical-grade second-skin protective film at the end of the session. Leave it on for 3 to 4 days, gently peel in a warm shower, wash with mild fragrance-free soap, and moisturize with the aftercare balm provided. Avoid swimming, direct sun, gyms, and soaking for 2 weeks.",
+        "We seal every completed tattoo with medical-grade, breathable second-skin protective film. Keep the film on for 3 to 4 days, gently wash with lukewarm water and mild fragrance-free antibacterial soap, pat dry, and apply our recommended soothing balm sparingly twice daily. Avoid sun exposure, swimming pools, gym workouts, and peeling flakes for two weeks.",
     },
     {
-      id: "cost",
-      question: "How is the tattoo quote calculated?",
+      id: "hygiene",
+      question: "Is the studio hygienic and are needles single-use?",
       answer:
-        "Quotes are determined by design complexity, detail density, body placement, and session duration. Every piece is estimated individually based on whether it is a small minimal piece, half-day, or full-day session. We provide a transparent personalized quote before you commit.",
+        "Hygiene and client safety are non-negotiable studio principles. We operate under strict hospital-grade sterilization protocols using 100% single-use EO-gas sterilized membrane needle cartridges, disposable grips, medical barrier film covers, and vegan, EU-certified inks. All needles are unsealed in front of you and safely discarded in certified sharps hazard containers immediately after.",
     },
     {
       id: "cover-ups",
-      question: "Can you rework or cover up an old or faded tattoo?",
+      question: "Can you cover up an old tattoo?",
       answer:
-        "Yes! Cover-ups and blast-overs are one of our specialties. We examine the saturation, scarring, and tone of your existing ink to integrate dark blackwork, dense geometric textures, or organic shading that makes the old tattoo disappear naturally.",
+        "Yes, custom cover-up and rework projects are a core studio strength. Midnight reviews your existing tattoo’s density, pigmentation, and skin texture during an in-depth consultation. We then compose bespoke blackwork, dark ornamental motifs, or realism elements that naturally integrate and disguise the old piece without requiring awkward dark solid blobs.",
     },
     {
-      id: "deposit",
-      question: "Why do you require an advance deposit?",
+      id: "quote",
+      question: "How do I get a quote?",
       answer:
-        "An advance deposit secures your calendar slot and compensates for the hours spent researching and drafting your custom stencil prior to your appointment. The deposit is non-refundable but 100% credited toward your final tattoo session.",
-    },
-    {
-      id: "requirements",
-      question: "What are the age, ID, and health requirements?",
-      answer:
-        "You must be at least 18 years of age with a valid government ID (Aadhaar, Passport, or Driver's License). We do not tattoo anyone pregnant or nursing. Please inform us of any skin conditions, blood thinning medications, or allergies beforehand.",
+        "Getting an estimate is simple and free. Send us your tattoo idea, reference images, approximate dimensions, and preferred body placement through our online booking form or via direct WhatsApp message. Midnight reviews every concept personally and provides an honest, tailored estimate with recommended session time within 24 hours.",
     },
   ] as FAQItem[],
-
-  seo: {
-    title: "Mad Monk Tattoo | Custom Tattoo Studio in Malumichampatti, Coimbatore & Palangarai, Avinashi",
-    description:
-      "Bespoke custom tattoos, sacred linework, dark geometric mandalas, fine-line and cover-ups by Mad Monk Tattoo Studio in Malumichampatti (Coimbatore) and Palangarai (Avinashi), Tamil Nadu. Book your private session.",
-    keywords: [
-      "Mad Monk Tattoo Studio",
-      "tattoo studio Malumichampatti",
-      "tattoo studio Coimbatore",
-      "best tattoo artist Coimbatore",
-      "tattoo artist Malumichampatti",
-      "tattoo studio Avinashi",
-      "tattoo studio Palangarai",
-      "tattoo studio Tirupur",
-      "fine line tattoo Tamil Nadu",
-      "blackwork tattoo artist India",
-      "geometric mandala tattoo Coimbatore",
-      "cover up tattoo specialist Coimbatore",
-    ],
-    canonicalUrl: "https://madmonktattoo.com",
-  },
 };

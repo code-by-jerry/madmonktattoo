@@ -362,7 +362,6 @@ export default function Gallery() {
                     fill
                     sizes="(max-width: 640px) 75vw, (max-width: 1024px) 45vw, 25vw"
                     className="object-cover transform transition-transform duration-700 ease-out group-hover:scale-105 pointer-events-none"
-                    priority={index >= N && index < N + 4}
                   />
 
                   {/* Gradient Overlay for Typography Readability */}

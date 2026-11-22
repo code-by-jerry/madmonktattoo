@@ -9,6 +9,7 @@ import {
   MapPin,
   Clock,
   Phone,
+  Mail,
   MessageCircle,
   Instagram,
   ArrowUpRight,
@@ -57,7 +58,7 @@ export default function Footer() {
                 </div>
               </Link>
               <p className="text-xs sm:text-sm text-theme-text-secondary font-light leading-relaxed max-w-sm mt-3">
-                Sacred linework, bespoke dark neo-traditional, and anatomical blackwork. Operating by private appointment across Malumichampatti, Coimbatore &amp; Palangarai, Avinashi, Tamil Nadu.
+                Tattoo studio in Coimbatore &amp; Tirupur. Sacred linework, realistic portraits, and bespoke custom blackwork created exclusively by private appointment across Malumichampatti, Coimbatore &amp; Palangarai, Avinashi.
               </p>
             </div>
 
@@ -82,20 +83,66 @@ export default function Footer() {
               Explore
             </h4>
             <ul className="space-y-2.5">
-              {siteConfig.navLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-xs uppercase tracking-widest text-theme-text-secondary hover:text-theme-text-primary hover:pl-1 transition-all"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a
+                  href="#"
+                  className="text-xs uppercase tracking-widest text-theme-text-secondary hover:text-theme-text-primary hover:pl-1 transition-all"
+                >
+                  Home
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#work"
+                  className="text-xs uppercase tracking-widest text-theme-text-secondary hover:text-theme-text-primary hover:pl-1 transition-all"
+                >
+                  Portfolio
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#styles"
+                  className="text-xs uppercase tracking-widest text-theme-text-secondary hover:text-theme-text-primary hover:pl-1 transition-all"
+                >
+                  Styles
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#process"
+                  className="text-xs uppercase tracking-widest text-theme-text-secondary hover:text-theme-text-primary hover:pl-1 transition-all"
+                >
+                  Process
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#locations"
+                  className="text-xs uppercase tracking-widest text-theme-text-secondary hover:text-theme-text-primary hover:pl-1 transition-all"
+                >
+                  Locations
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#faq"
+                  className="text-xs uppercase tracking-widest text-theme-text-secondary hover:text-theme-text-primary hover:pl-1 transition-all"
+                >
+                  FAQ
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#booking"
+                  className="text-xs uppercase tracking-widest text-theme-text-secondary hover:text-theme-text-primary hover:pl-1 transition-all"
+                >
+                  Book Session
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Studio Details & Timings (3 cols) */}
+          {/* Studio Details & NAP Block (3 cols) */}
           <div className="lg:col-span-3 space-y-4">
             <div>
               <span className="text-xs font-mono uppercase tracking-[0.25em] text-blood block mb-1">
@@ -106,9 +153,13 @@ export default function Footer() {
               </h2>
             </div>
 
-            {/* Two Studio Addresses */}
+            {/* Exact NAP (Name, Address, Phone, Email) */}
             <div className="space-y-3">
-              {siteConfig.contact.studios.map((studio, sIdx) => (
+              <div className="text-xs text-theme-text-primary font-mono font-semibold">
+                {siteConfig.brand.name}
+              </div>
+
+              {siteConfig.contact.studios.map((studio) => (
                 <div key={studio.id} className="flex items-start space-x-2.5 text-xs text-theme-text-secondary">
                   <MapPin className="w-4 h-4 text-blood shrink-0 mt-0.5" />
                   <div>
@@ -137,6 +188,16 @@ export default function Footer() {
             </div>
 
             <div className="flex items-center space-x-3 text-xs text-theme-text-secondary">
+              <Mail className="w-4 h-4 text-blood shrink-0" />
+              <a
+                href={`mailto:${siteConfig.contact.email}`}
+                className="hover:text-blood transition-colors font-mono"
+              >
+                {siteConfig.contact.email}
+              </a>
+            </div>
+
+            <div className="flex items-center space-x-3 text-xs text-theme-text-secondary">
               <MessageCircle className="w-4 h-4 text-blood shrink-0" />
               <a
                 href={siteConfig.contact.whatsappUrl}
@@ -144,7 +205,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="hover:text-blood transition-colors font-mono"
               >
-                WhatsApp Direct: {siteConfig.contact.phone}
+                WhatsApp: {siteConfig.contact.phone}
               </a>
             </div>
           </div>
@@ -200,7 +261,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-theme-border flex flex-col sm:flex-row items-center justify-between text-[11px] text-theme-text-muted font-mono">
           <p>© {currentYear} {siteConfig.brand.name}. All rights reserved.</p>
           <p className="mt-2 sm:mt-0 tracking-wider">
-            Malumichampatti, Coimbatore &amp; Palangarai, Avinashi • Sterile Single-Use Cartridges • Strictly By Appointment
+            Tattoo studio in Coimbatore &amp; Tirupur • Malumichampatti &amp; Palangarai • Sterile Single-Use Cartridges • Strictly By Appointment
           </p>
         </div>
       </div>

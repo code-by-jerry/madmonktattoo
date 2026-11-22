@@ -86,7 +86,7 @@ export default function Hero() {
               className="inline-flex items-center justify-center space-x-2 px-6 py-3.5 border border-zinc-300 dark:border-zinc-700 hover:border-blood text-zinc-900 dark:text-white text-xs uppercase tracking-[0.2em] font-medium transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
             >
               <Calendar className="w-4 h-4 text-blood" />
-              <span>Request a Session</span>
+              <span>Request a Booking</span>
             </a>
           </div>
 
