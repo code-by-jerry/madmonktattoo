@@ -37,9 +37,9 @@ export default function ThemeToggle({ className = "" }: ThemeToggleProps) {
     >
       <span className="sr-only">Toggle theme</span>
       {isDark ? (
-        <Sun className="w-4 h-4 text-theme-text-muted group-hover:text-blood transition-transform duration-300 group-hover:rotate-45" />
+        <Sun className="w-4 h-4 text-current group-hover:text-blood transition-transform duration-300 group-hover:rotate-45" />
       ) : (
-        <Moon className="w-4 h-4 text-theme-text-muted group-hover:text-blood transition-transform duration-300 group-hover:-rotate-12" />
+        <Moon className="w-4 h-4 text-current group-hover:text-blood transition-transform duration-300 group-hover:-rotate-12" />
       )}
     </button>
   );
