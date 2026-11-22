@@ -149,7 +149,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-theme-bg text-theme-text-primary antialiased selection:bg-blood selection:text-white transition-colors duration-300">
+      <body className="min-h-screen bg-theme-bg text-theme-text-primary antialiased selection:bg-blood selection:text-white transition-colors duration-300" suppressHydrationWarning>
         <ThemeProvider>
           <Navbar />
           <main>{children}</main>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -87,7 +87,13 @@ export default function BookingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [minDate, setMinDate] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    // Avoid server/client timezone mismatch on hydration
+    setMinDate(new Date().toISOString().split("T")[0]);
+  }, []);
 
   const {
     register,
@@ -418,7 +424,7 @@ export default function BookingForm() {
                 <input
                   id="preferredDate"
                   type="date"
-                  min={new Date().toISOString().split("T")[0]}
+                  min={minDate || undefined}
                   {...register("preferredDate")}
                   className="w-full px-4 py-3 bg-theme-bg border border-theme-border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors"
                 />
