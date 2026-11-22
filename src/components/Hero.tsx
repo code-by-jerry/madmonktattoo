@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { siteConfig } from "@/data/site";
 import { images } from "@/data/images";
 import Image from "next/image";
-import { MessageCircle, Calendar, ShieldCheck, Sparkles, ChevronDown } from "lucide-react";
+import { MessageCircle, Calendar, ShieldCheck, ChevronDown } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -17,11 +17,11 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-25 scale-105"
+          className="object-cover opacity-20 dark:opacity-25 scale-105"
         />
-        {/* Gradients to blend into near-black */}
-        <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/80 to-dark/95" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(179,18,45,0.12)_0%,transparent_70%)]" />
+        {/* Gradients blending into current theme background */}
+        <div className="absolute inset-0 bg-gradient-to-t from-theme-bg via-theme-bg/85 to-theme-bg/95" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(179,18,45,0.08)_0%,transparent_70%)]" />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
@@ -42,7 +42,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-ink-paper leading-[1.08] max-w-4xl"
+          className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-theme-text-primary leading-[1.08] max-w-4xl"
         >
           Your Story, <span className="text-blood italic">Inked.</span>
         </motion.h1>
@@ -52,7 +52,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="mt-6 text-base sm:text-lg md:text-xl text-ink-muted max-w-2xl font-light leading-relaxed tracking-wide"
+          className="mt-6 text-base sm:text-lg md:text-xl text-theme-text-secondary max-w-2xl font-light leading-relaxed tracking-wide"
         >
           {siteConfig.brand.subheadline}
         </motion.p>
@@ -76,7 +76,7 @@ export default function Hero() {
 
           <a
             href="#booking"
-            className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 px-8 py-4 border border-ink-paper/30 hover:border-ink-paper bg-dark/60 hover:bg-ink-paper/10 text-ink-paper text-xs uppercase tracking-[0.25em] font-semibold transition-all"
+            className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 px-8 py-4 border border-theme-border hover:border-blood bg-theme-card/60 hover:bg-theme-surface text-theme-text-primary text-xs uppercase tracking-[0.25em] font-semibold transition-all shadow-sm"
           >
             <Calendar className="w-4 h-4 text-blood" />
             <span>Request a Booking</span>
@@ -88,13 +88,13 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-14 pt-8 border-t border-ink-paper/10 w-full max-w-3xl"
+          className="mt-14 pt-8 border-t border-theme-border w-full max-w-3xl"
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             {siteConfig.brand.trustRow.map((item, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center space-x-2 text-ink-paper/70 text-xs tracking-wider"
+                className="flex items-center justify-center space-x-2 text-theme-text-secondary text-xs tracking-wider"
               >
                 <ShieldCheck className="w-3.5 h-3.5 text-blood shrink-0" />
                 <span>{item}</span>
@@ -104,7 +104,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Scroll indicator */}
-        <div className="mt-12 hidden md:flex flex-col items-center text-ink-dim hover:text-ink-paper transition-colors">
+        <div className="mt-12 hidden md:flex flex-col items-center text-theme-text-muted hover:text-theme-text-primary transition-colors">
           <a href="#work" className="flex flex-col items-center" aria-label="Scroll to portfolio">
             <span className="text-[10px] uppercase tracking-[0.3em] mb-1 font-mono">Explore</span>
             <ChevronDown className="w-4 h-4 text-blood animate-bounce" />

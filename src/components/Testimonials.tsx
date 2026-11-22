@@ -19,7 +19,7 @@ export default function Testimonials() {
   const current = siteConfig.testimonials[currentIndex];
 
   return (
-    <section className="py-24 relative bg-dark-surface/50 border-t border-ink-paper/10 overflow-hidden">
+    <section className="py-24 relative bg-theme-surface/30 border-t border-theme-border overflow-hidden transition-colors duration-300">
       {/* Background Decor */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blood/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -29,13 +29,13 @@ export default function Testimonials() {
           <div className="inline-flex items-center space-x-2 text-blood text-xs uppercase tracking-[0.3em] font-mono mb-3">
             <span>// 06 HEALED STORIES</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-ink-paper">
+          <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-theme-text-primary">
             Client Testimonials
           </h2>
         </div>
 
         {/* Carousel Container */}
-        <div className="relative bg-dark-card border border-ink-paper/10 p-8 sm:p-12 md:p-16 shadow-2xl">
+        <div className="relative bg-theme-card border border-theme-border p-8 sm:p-12 md:p-16 shadow-xl">
           <Quote className="w-12 h-12 text-blood/20 absolute top-8 left-8" />
 
           <div className="relative min-h-[220px] flex items-center justify-center">
@@ -56,16 +56,16 @@ export default function Testimonials() {
                 </div>
 
                 {/* Review Text */}
-                <p className="font-serif italic text-lg sm:text-xl md:text-2xl text-ink-paper font-light leading-relaxed">
+                <p className="font-serif italic text-lg sm:text-xl md:text-2xl text-theme-text-primary font-light leading-relaxed">
                   &ldquo;{current.quote}&rdquo;
                 </p>
 
                 {/* Client info & Tattoo piece */}
                 <div className="mt-8">
-                  <div className="font-display text-lg font-bold text-ink-paper tracking-wider">
+                  <div className="font-display text-lg font-bold text-theme-text-primary tracking-wider">
                     {current.client}
                   </div>
-                  <div className="text-xs font-mono uppercase tracking-widest text-ink-muted mt-1">
+                  <div className="text-xs font-mono uppercase tracking-widest text-theme-text-muted mt-1">
                     {current.location} • <span className="text-blood">{current.tattooType}</span>
                   </div>
                 </div>
@@ -74,7 +74,7 @@ export default function Testimonials() {
           </div>
 
           {/* Carousel Controls */}
-          <div className="mt-10 pt-6 border-t border-ink-paper/10 flex items-center justify-between">
+          <div className="mt-10 pt-6 border-t border-theme-border flex items-center justify-between">
             {/* Dots */}
             <div className="flex items-center space-x-2">
               {siteConfig.testimonials.map((_, i) => (
@@ -82,7 +82,7 @@ export default function Testimonials() {
                   key={i}
                   onClick={() => setCurrentIndex(i)}
                   className={`h-1.5 transition-all ${
-                    currentIndex === i ? "w-8 bg-blood" : "w-2 bg-ink-paper/20 hover:bg-ink-paper/40"
+                    currentIndex === i ? "w-8 bg-blood" : "w-2 bg-theme-border hover:bg-theme-text-muted"
                   }`}
                   aria-label={`Go to slide ${i + 1}`}
                 />
@@ -93,14 +93,14 @@ export default function Testimonials() {
             <div className="flex items-center space-x-2">
               <button
                 onClick={prevReview}
-                className="p-2.5 border border-ink-paper/20 hover:border-blood text-ink-paper hover:text-blood transition-colors"
+                className="p-2.5 border border-theme-border hover:border-blood text-theme-text-primary hover:text-blood transition-colors"
                 aria-label="Previous review"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={nextReview}
-                className="p-2.5 border border-ink-paper/20 hover:border-blood text-ink-paper hover:text-blood transition-colors"
+                className="p-2.5 border border-theme-border hover:border-blood text-theme-text-primary hover:text-blood transition-colors"
                 aria-label="Next review"
               >
                 <ChevronRight className="w-4 h-4" />

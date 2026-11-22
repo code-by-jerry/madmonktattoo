@@ -44,22 +44,19 @@ export default function Gallery() {
     selectedIndex !== null ? images.gallery[selectedIndex] : null;
 
   return (
-    <section id="work" className="py-24 relative bg-dark">
-      {/* Background Ambience */}
-      <div className="absolute inset-0 bg-noise opacity-50 pointer-events-none" />
-
+    <section id="work" className="py-24 relative bg-theme-bg transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-ink-paper/10 pb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-theme-border pb-8">
           <div>
             <div className="inline-flex items-center space-x-2 text-blood text-xs uppercase tracking-[0.3em] font-mono mb-3">
               <span>// 01 ARCHIVE</span>
             </div>
-            <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-ink-paper">
+            <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-theme-text-primary">
               Selected Work
             </h2>
           </div>
-          <p className="mt-4 md:mt-0 text-ink-muted text-sm max-w-md font-light tracking-wide">
+          <p className="mt-4 md:mt-0 text-theme-text-secondary text-sm max-w-md font-light tracking-wide">
             Every ink mark tells a private ritual. Click any piece to inspect high-resolution linework and stippling details.
           </p>
         </div>
@@ -73,7 +70,7 @@ export default function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.06 }}
-              className="break-inside-avoid group relative cursor-pointer overflow-hidden border border-ink-paper/10 bg-dark-card hover:border-blood/50 transition-all duration-500"
+              className="break-inside-avoid group relative cursor-pointer overflow-hidden border border-theme-border bg-theme-card hover:border-blood/70 transition-all duration-500 shadow-md"
               onClick={() => openLightbox(index)}
               tabIndex={0}
               role="button"
@@ -90,12 +87,12 @@ export default function Gallery() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
 
-                {/* Dark Hover Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
                   <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-blood mb-1">
                     {tattoo.style}
                   </span>
-                  <h3 className="font-display text-lg font-bold text-ink-paper">
+                  <h3 className="font-display text-lg font-bold text-white">
                     {tattoo.title}
                   </h3>
                   <div className="mt-2 flex items-center space-x-1 text-ink-muted text-xs">
@@ -105,8 +102,8 @@ export default function Gallery() {
                 </div>
 
                 {/* Corner Frame Accents */}
-                <span className="absolute top-2 left-2 w-2 h-2 border-t border-l border-ink-paper/20 group-hover:border-blood transition-colors" />
-                <span className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-ink-paper/20 group-hover:border-blood transition-colors" />
+                <span className="absolute top-2 left-2 w-2 h-2 border-t border-l border-theme-border group-hover:border-blood transition-colors" />
+                <span className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-theme-border group-hover:border-blood transition-colors" />
               </div>
             </motion.div>
           ))}
@@ -127,7 +124,7 @@ export default function Gallery() {
             {/* Close Button */}
             <button
               onClick={closeLightbox}
-              className="absolute top-6 right-6 z-50 p-2 text-ink-paper/80 hover:text-blood bg-dark-card/80 border border-ink-paper/20 hover:border-blood transition-colors"
+              className="absolute top-6 right-6 z-50 p-2 text-white/80 hover:text-blood bg-dark-card/80 border border-white/20 hover:border-blood transition-colors"
               aria-label="Close lightbox"
             >
               <X className="w-6 h-6" />
@@ -139,7 +136,7 @@ export default function Gallery() {
                 e.stopPropagation();
                 prevImage();
               }}
-              className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-50 p-3 text-ink-paper/80 hover:text-blood bg-dark-card/70 border border-ink-paper/20 hover:border-blood transition-colors"
+              className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-50 p-3 text-white/80 hover:text-blood bg-dark-card/70 border border-white/20 hover:border-blood transition-colors"
               aria-label="Previous artwork"
             >
               <ChevronLeft className="w-6 h-6" />
@@ -151,7 +148,7 @@ export default function Gallery() {
                 e.stopPropagation();
                 nextImage();
               }}
-              className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-50 p-3 text-ink-paper/80 hover:text-blood bg-dark-card/70 border border-ink-paper/20 hover:border-blood transition-colors"
+              className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-50 p-3 text-white/80 hover:text-blood bg-dark-card/70 border border-white/20 hover:border-blood transition-colors"
               aria-label="Next artwork"
             >
               <ChevronRight className="w-6 h-6" />
@@ -162,7 +159,7 @@ export default function Gallery() {
               className="relative max-w-4xl max-h-[85vh] w-full flex flex-col items-center"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative w-full max-h-[70vh] flex items-center justify-center overflow-hidden border border-ink-paper/20 bg-dark-card">
+              <div className="relative w-full max-h-[70vh] flex items-center justify-center overflow-hidden border border-white/20 bg-dark-card">
                 <Image
                   src={activeTattoo.src}
                   alt={activeTattoo.alt}
@@ -174,19 +171,19 @@ export default function Gallery() {
               </div>
 
               {/* Caption Bar */}
-              <div className="mt-4 w-full flex flex-col sm:flex-row sm:items-center justify-between text-left border-t border-ink-paper/10 pt-3">
+              <div className="mt-4 w-full flex flex-col sm:flex-row sm:items-center justify-between text-left border-t border-white/10 pt-3 text-white">
                 <div>
                   <span className="text-xs uppercase font-mono tracking-widest text-blood">
                     {activeTattoo.style} • Piece {selectedIndex + 1} of {images.gallery.length}
                   </span>
-                  <h4 className="font-display text-xl text-ink-paper font-semibold mt-0.5">
+                  <h4 className="font-display text-xl text-white font-semibold mt-0.5">
                     {activeTattoo.title}
                   </h4>
                 </div>
                 <a
                   href="#booking"
                   onClick={closeLightbox}
-                  className="mt-3 sm:mt-0 inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-ink-paper border border-ink-paper/20 hover:border-blood hover:text-blood px-4 py-2 transition-colors self-start"
+                  className="mt-3 sm:mt-0 inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-white border border-white/20 hover:border-blood hover:text-blood px-4 py-2 transition-colors self-start"
                 >
                   <span>Request Similar Custom Design</span>
                 </a>

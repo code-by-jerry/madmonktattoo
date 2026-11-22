@@ -5,6 +5,7 @@ import { siteConfig } from "@/data/site";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 // Sans-serif body font
 const inter = Inter({
@@ -67,7 +68,7 @@ export const metadata: Metadata = {
     creator: siteConfig.contact.instagram,
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicon.svg",
   },
 };
 
@@ -120,18 +121,41 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${inter.variable} ${cinzel.variable}`}>
+    <html lang="en" className={`${inter.variable} ${cinzel.variable} dark`} suppressHydrationWarning>
       <head>
+        {/* Anti-flash script for instantaneous theme rendering */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('madmonk-theme');
+                  if (saved === 'light') {
+                    document.documentElement.classList.add('light');
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.style.colorScheme = 'light';
+                  } else {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
+                    document.documentElement.style.colorScheme = 'dark';
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-dark text-ink-paper antialiased selection:bg-blood selection:text-white">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <WhatsAppFloat />
+      <body className="min-h-screen bg-theme-bg text-theme-text-primary antialiased selection:bg-blood selection:text-white transition-colors duration-300">
+        <ThemeProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <WhatsAppFloat />
+        </ThemeProvider>
       </body>
     </html>
   );

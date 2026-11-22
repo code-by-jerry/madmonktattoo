@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { siteConfig } from "@/data/site";
 import { Phone, MessageCircle, Menu, X } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,7 +18,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu when anchor link clicked
   const handleNavClick = () => {
     setMobileMenuOpen(false);
   };
@@ -26,7 +26,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-dark/90 backdrop-blur-md border-b border-ink-paper/10 py-3 shadow-2xl"
+          ? "bg-theme-bg/95 backdrop-blur-md border-b border-theme-border py-3 shadow-lg"
           : "bg-transparent py-5"
       }`}
     >
@@ -40,11 +40,11 @@ export default function Navbar() {
           >
             <div className="flex items-center space-x-2">
               <span className="w-2 h-2 bg-blood rotate-45 inline-block group-hover:scale-125 transition-transform" />
-              <span className="font-display font-bold text-xl sm:text-2xl tracking-[0.22em] text-ink-paper group-hover:text-white transition-colors">
+              <span className="font-display font-bold text-xl sm:text-2xl tracking-[0.22em] text-theme-text-primary group-hover:text-blood transition-colors">
                 {siteConfig.brand.wordmarkPrefix} <span className="text-blood">{siteConfig.brand.wordmarkSuffix}</span>
               </span>
             </div>
-            <span className="text-[9px] tracking-[0.35em] text-ink-muted uppercase pl-4 font-mono">
+            <span className="text-[9px] tracking-[0.35em] text-theme-text-muted uppercase pl-4 font-mono">
               {siteConfig.brand.submark}
             </span>
           </Link>
@@ -58,18 +58,20 @@ export default function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-xs uppercase tracking-[0.2em] font-medium text-ink-muted hover:text-ink-paper hover:border-b hover:border-blood py-1 transition-all"
+                className="text-xs uppercase tracking-[0.2em] font-medium text-theme-text-secondary hover:text-theme-text-primary hover:border-b hover:border-blood py-1 transition-all"
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          {/* Desktop Action Buttons */}
+          {/* Desktop Action Buttons + Theme Toggle */}
           <div className="hidden lg:flex items-center space-x-3">
+            <ThemeToggle />
+
             <a
               href={`tel:${siteConfig.contact.phoneClean}`}
-              className="inline-flex items-center space-x-2 px-4 py-2 border border-ink-paper/20 rounded-none text-xs uppercase tracking-widest text-ink-paper hover:bg-ink-paper/10 hover:border-ink-paper/40 transition-colors"
+              className="inline-flex items-center space-x-2 px-4 py-2 border border-theme-border rounded-none text-xs uppercase tracking-widest text-theme-text-primary hover:bg-theme-surface hover:border-blood transition-colors"
               aria-label={`Call ${siteConfig.brand.name} at ${siteConfig.contact.phone}`}
             >
               <Phone className="w-3.5 h-3.5 text-blood" />
@@ -87,11 +89,12 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile Hamburger Button */}
+          {/* Mobile Actions: Theme Toggle + Phone + Hamburger */}
           <div className="flex md:hidden items-center space-x-2">
+            <ThemeToggle />
             <a
               href={`tel:${siteConfig.contact.phoneClean}`}
-              className="p-2 border border-ink-paper/20 text-ink-paper hover:bg-ink-paper/10 rounded-none"
+              className="p-2 border border-theme-border text-theme-text-primary hover:bg-theme-surface rounded-none"
               aria-label="Call studio"
             >
               <Phone className="w-4 h-4 text-blood" />
@@ -99,7 +102,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-ink-paper hover:text-blood transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blood"
+              className="p-2 text-theme-text-primary hover:text-blood transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blood"
               aria-expanded={mobileMenuOpen}
               aria-label="Toggle menu"
             >
@@ -111,14 +114,14 @@ export default function Navbar() {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-dark-surface border-b border-ink-paper/10 px-6 py-6 space-y-5 animate-in slide-in-from-top-4 duration-200">
+        <div className="md:hidden bg-theme-surface border-b border-theme-border px-6 py-6 space-y-5 animate-in slide-in-from-top-4 duration-200 shadow-2xl">
           <nav className="flex flex-col space-y-4" aria-label="Mobile Navigation">
             {siteConfig.navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={handleNavClick}
-                className="text-sm font-medium uppercase tracking-[0.2em] text-ink-paper/80 hover:text-blood py-2 border-b border-ink-paper/5 transition-colors"
+                className="text-sm font-medium uppercase tracking-[0.2em] text-theme-text-secondary hover:text-blood py-2 border-b border-theme-border-subtle transition-colors"
               >
                 {link.label}
               </a>
@@ -137,7 +140,7 @@ export default function Navbar() {
             </a>
             <a
               href={`tel:${siteConfig.contact.phoneClean}`}
-              className="flex items-center justify-center space-x-2 w-full py-3 border border-ink-paper/20 text-ink-paper text-xs uppercase tracking-widest"
+              className="flex items-center justify-center space-x-2 w-full py-3 border border-theme-border text-theme-text-primary text-xs uppercase tracking-widest hover:bg-theme-bg"
             >
               <Phone className="w-4 h-4 text-blood" />
               <span>Call {siteConfig.contact.phone}</span>

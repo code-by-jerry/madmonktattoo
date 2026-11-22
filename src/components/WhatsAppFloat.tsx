@@ -16,7 +16,7 @@ export default function WhatsAppFloat() {
     >
       {/* Tooltip / Pill on Desktop */}
       <div
-        className={`hidden sm:flex items-center bg-dark/95 border border-blood/60 text-ink-paper px-3 py-1.5 shadow-2xl transition-all duration-300 ${
+        className={`hidden sm:flex items-center bg-theme-card/95 backdrop-blur-sm border border-blood/60 text-theme-text-primary px-3 py-1.5 shadow-2xl transition-all duration-300 ${
           isHovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4 pointer-events-none"
         }`}
       >
@@ -39,7 +39,7 @@ export default function WhatsAppFloat() {
         <MessageCircle className="w-6 h-6 relative z-10 fill-white" />
 
         {/* Small live dot */}
-        <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-dark" />
+        <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-theme-card" />
       </a>
     </aside>
   );

@@ -11,9 +11,7 @@ import {
   CheckCircle2,
   AlertCircle,
   Loader2,
-  Calendar,
   MessageCircle,
-  FileImage,
 } from "lucide-react";
 
 // Form validation schema
@@ -103,7 +101,6 @@ export default function BookingForm() {
     },
   });
 
-  // Handle image upload with size limit check (5MB)
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImageError(null);
     const files = e.target.files;
@@ -185,29 +182,29 @@ export default function BookingForm() {
   };
 
   return (
-    <section id="booking" className="py-24 relative bg-dark border-t border-ink-paper/10">
+    <section id="booking" className="py-24 relative bg-theme-bg border-t border-theme-border transition-colors duration-300">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center space-x-2 text-blood text-xs uppercase tracking-[0.3em] font-mono mb-3">
             <span>// 07 INK CONSULTATION</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-ink-paper">
+          <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-theme-text-primary">
             Request A Custom Session
           </h2>
-          <p className="mt-4 text-ink-muted text-sm sm:text-base font-light tracking-wide max-w-xl mx-auto">
+          <p className="mt-4 text-theme-text-secondary text-sm sm:text-base font-light tracking-wide max-w-xl mx-auto">
             Fill in your concept details below. Vikram reviews every inquiry personally and responds within 24 hours.
           </p>
         </div>
 
         {/* Success Banner */}
         {isSuccess ? (
-          <div className="p-8 sm:p-12 bg-dark-card border border-blood/60 text-center shadow-2xl animate-in fade-in duration-300">
+          <div className="p-8 sm:p-12 bg-theme-card border border-blood/60 text-center shadow-2xl animate-in fade-in duration-300">
             <CheckCircle2 className="w-16 h-16 text-blood mx-auto mb-6" />
-            <h3 className="font-display text-2xl sm:text-3xl font-bold text-ink-paper">
+            <h3 className="font-display text-2xl sm:text-3xl font-bold text-theme-text-primary">
               Request Received
             </h3>
-            <p className="mt-3 text-ink-muted text-sm sm:text-base max-w-lg mx-auto leading-relaxed font-light">
+            <p className="mt-3 text-theme-text-secondary text-sm sm:text-base max-w-lg mx-auto leading-relaxed font-light">
               Thank you for reaching out. Vikram has received your tattoo inquiry and will connect with you on WhatsApp shortly with initial thoughts and scheduling availability.
             </p>
 
@@ -224,7 +221,7 @@ export default function BookingForm() {
               <button
                 type="button"
                 onClick={() => setIsSuccess(false)}
-                className="w-full sm:w-auto px-6 py-3.5 border border-ink-paper/20 hover:border-ink-paper text-ink-paper text-xs uppercase tracking-widest"
+                className="w-full sm:w-auto px-6 py-3.5 border border-theme-border hover:border-blood text-theme-text-primary text-xs uppercase tracking-widest"
               >
                 Submit Another Request
               </button>
@@ -234,7 +231,7 @@ export default function BookingForm() {
           <form
             onSubmit={handleSubmit(onSubmit)}
             noValidate
-            className="p-6 sm:p-10 md:p-12 bg-dark-card border border-ink-paper/10 shadow-2xl space-y-6"
+            className="p-6 sm:p-10 md:p-12 bg-theme-card border border-theme-border shadow-xl space-y-6"
           >
             {/* Honeypot field (hidden from view) */}
             <input
@@ -256,7 +253,7 @@ export default function BookingForm() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Full Name */}
               <div>
-                <label htmlFor="fullName" className="block text-xs uppercase font-mono tracking-wider text-ink-paper/80 mb-2">
+                <label htmlFor="fullName" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
                   Full Name <span className="text-blood">*</span>
                 </label>
                 <input
@@ -264,8 +261,8 @@ export default function BookingForm() {
                   type="text"
                   placeholder="e.g. Arjun Mehta"
                   {...register("fullName")}
-                  className={`w-full px-4 py-3 bg-dark border text-sm text-ink-paper placeholder-ink-dim focus:outline-none focus:border-blood ${
-                    errors.fullName ? "border-blood" : "border-ink-paper/20"
+                  className={`w-full px-4 py-3 bg-theme-bg border text-sm text-theme-text-primary placeholder:text-theme-text-muted focus:outline-none focus:border-blood transition-colors ${
+                    errors.fullName ? "border-blood" : "border-theme-border"
                   }`}
                 />
                 {errors.fullName && (
@@ -278,7 +275,7 @@ export default function BookingForm() {
 
               {/* Phone / WhatsApp */}
               <div>
-                <label htmlFor="phone" className="block text-xs uppercase font-mono tracking-wider text-ink-paper/80 mb-2">
+                <label htmlFor="phone" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
                   Phone / WhatsApp <span className="text-blood">*</span>
                 </label>
                 <input
@@ -286,8 +283,8 @@ export default function BookingForm() {
                   type="tel"
                   placeholder="+91 98765 43210"
                   {...register("phone")}
-                  className={`w-full px-4 py-3 bg-dark border text-sm text-ink-paper placeholder-ink-dim focus:outline-none focus:border-blood ${
-                    errors.phone ? "border-blood" : "border-ink-paper/20"
+                  className={`w-full px-4 py-3 bg-theme-bg border text-sm text-theme-text-primary placeholder:text-theme-text-muted focus:outline-none focus:border-blood transition-colors ${
+                    errors.phone ? "border-blood" : "border-theme-border"
                   }`}
                 />
                 {errors.phone && (
@@ -303,19 +300,19 @@ export default function BookingForm() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Placement */}
               <div>
-                <label htmlFor="placement" className="block text-xs uppercase font-mono tracking-wider text-ink-paper/80 mb-2">
+                <label htmlFor="placement" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
                   Body Placement <span className="text-blood">*</span>
                 </label>
                 <select
                   id="placement"
                   {...register("placement")}
-                  className={`w-full px-4 py-3 bg-dark border text-sm text-ink-paper focus:outline-none focus:border-blood ${
-                    errors.placement ? "border-blood" : "border-ink-paper/20"
+                  className={`w-full px-4 py-3 bg-theme-bg border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors ${
+                    errors.placement ? "border-blood" : "border-theme-border"
                   }`}
                 >
                   <option value="">Select body location</option>
                   {PLACEMENT_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt} className="bg-dark text-ink-paper">
+                    <option key={opt} value={opt} className="bg-theme-bg text-theme-text-primary">
                       {opt}
                     </option>
                   ))}
@@ -330,19 +327,19 @@ export default function BookingForm() {
 
               {/* Size */}
               <div>
-                <label htmlFor="size" className="block text-xs uppercase font-mono tracking-wider text-ink-paper/80 mb-2">
+                <label htmlFor="size" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
                   Approximate Size <span className="text-blood">*</span>
                 </label>
                 <select
                   id="size"
                   {...register("size")}
-                  className={`w-full px-4 py-3 bg-dark border text-sm text-ink-paper focus:outline-none focus:border-blood ${
-                    errors.size ? "border-blood" : "border-ink-paper/20"
+                  className={`w-full px-4 py-3 bg-theme-bg border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors ${
+                    errors.size ? "border-blood" : "border-theme-border"
                   }`}
                 >
                   <option value="">Select target size</option>
                   {SIZE_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt} className="bg-dark text-ink-paper">
+                    <option key={opt} value={opt} className="bg-theme-bg text-theme-text-primary">
                       {opt}
                     </option>
                   ))}
@@ -360,19 +357,19 @@ export default function BookingForm() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Preferred Style */}
               <div>
-                <label htmlFor="style" className="block text-xs uppercase font-mono tracking-wider text-ink-paper/80 mb-2">
+                <label htmlFor="style" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
                   Preferred Style <span className="text-blood">*</span>
                 </label>
                 <select
                   id="style"
                   {...register("style")}
-                  className={`w-full px-4 py-3 bg-dark border text-sm text-ink-paper focus:outline-none focus:border-blood ${
-                    errors.style ? "border-blood" : "border-ink-paper/20"
+                  className={`w-full px-4 py-3 bg-theme-bg border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors ${
+                    errors.style ? "border-blood" : "border-theme-border"
                   }`}
                 >
                   <option value="">Select aesthetic style</option>
                   {STYLE_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt} className="bg-dark text-ink-paper">
+                    <option key={opt} value={opt} className="bg-theme-bg text-theme-text-primary">
                       {opt}
                     </option>
                   ))}
@@ -387,7 +384,7 @@ export default function BookingForm() {
 
               {/* Preferred Date */}
               <div>
-                <label htmlFor="preferredDate" className="block text-xs uppercase font-mono tracking-wider text-ink-paper/80 mb-2">
+                <label htmlFor="preferredDate" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
                   Preferred Date (Optional)
                 </label>
                 <div className="relative">
@@ -396,7 +393,7 @@ export default function BookingForm() {
                     type="date"
                     min={new Date().toISOString().split("T")[0]}
                     {...register("preferredDate")}
-                    className="w-full px-4 py-3 bg-dark border border-ink-paper/20 text-sm text-ink-paper focus:outline-none focus:border-blood"
+                    className="w-full px-4 py-3 bg-theme-bg border border-theme-border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors"
                   />
                 </div>
               </div>
@@ -404,7 +401,7 @@ export default function BookingForm() {
 
             {/* Tattoo Idea (Textarea) */}
             <div>
-              <label htmlFor="tattooIdea" className="block text-xs uppercase font-mono tracking-wider text-ink-paper/80 mb-2">
+              <label htmlFor="tattooIdea" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
                 Tattoo Idea & Symbolism <span className="text-blood">*</span>
               </label>
               <textarea
@@ -412,8 +409,8 @@ export default function BookingForm() {
                 rows={4}
                 placeholder="Describe your story, symbolism, reference elements, or if this is a cover-up..."
                 {...register("tattooIdea")}
-                className={`w-full px-4 py-3 bg-dark border text-sm text-ink-paper placeholder-ink-dim focus:outline-none focus:border-blood resize-y ${
-                  errors.tattooIdea ? "border-blood" : "border-ink-paper/20"
+                className={`w-full px-4 py-3 bg-theme-bg border text-sm text-theme-text-primary placeholder:text-theme-text-muted focus:outline-none focus:border-blood resize-y transition-colors ${
+                  errors.tattooIdea ? "border-blood" : "border-theme-border"
                 }`}
               />
               {errors.tattooIdea && (
@@ -426,24 +423,24 @@ export default function BookingForm() {
 
             {/* Reference Image Upload (Up to 3 images, max 5MB each) */}
             <div>
-              <label className="block text-xs uppercase font-mono tracking-wider text-ink-paper/80 mb-2">
+              <label className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
                 Reference Images (Up to 3 photos, Max 5MB each)
               </label>
 
               {images.length < 3 && (
                 <div
                   onClick={() => fileInputRef.current?.click()}
-                  className="border border-dashed border-ink-paper/20 hover:border-blood p-6 text-center cursor-pointer transition-colors bg-dark/50"
+                  className="border border-dashed border-theme-border hover:border-blood p-6 text-center cursor-pointer transition-colors bg-theme-surface/50"
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => e.key === "Enter" && fileInputRef.current?.click()}
                   aria-label="Upload reference images"
                 >
                   <Upload className="w-6 h-6 text-blood mx-auto mb-2" />
-                  <p className="text-xs text-ink-paper font-medium">
+                  <p className="text-xs text-theme-text-primary font-medium">
                     Click to browse or drop reference photos here
                   </p>
-                  <p className="text-[11px] text-ink-dim mt-1">
+                  <p className="text-[11px] text-theme-text-muted mt-1 font-mono">
                     JPEG, PNG, WebP up to 5MB each ({3 - images.length} remaining)
                   </p>
                   <input
@@ -470,7 +467,7 @@ export default function BookingForm() {
                   {images.map((img, idx) => (
                     <div
                       key={idx}
-                      className="relative aspect-square border border-ink-paper/20 bg-dark overflow-hidden group"
+                      className="relative aspect-square border border-theme-border bg-theme-bg overflow-hidden group shadow-sm"
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
@@ -486,7 +483,7 @@ export default function BookingForm() {
                       >
                         <X className="w-3.5 h-3.5" />
                       </button>
-                      <span className="absolute bottom-1 left-1.5 text-[9px] font-mono text-ink-muted bg-black/70 px-1">
+                      <span className="absolute bottom-1 left-1.5 text-[9px] font-mono text-white bg-black/70 px-1">
                         {(img.size / 1024 / 1024).toFixed(1)} MB
                       </span>
                     </div>
@@ -511,7 +508,7 @@ export default function BookingForm() {
                   <span>Send Booking Request</span>
                 )}
               </button>
-              <p className="text-center text-[11px] text-ink-dim mt-3 font-light">
+              <p className="text-center text-[11px] text-theme-text-muted mt-3 font-light">
                 No payment charged now. Session date and stencil deposit are agreed upon after consultation.
               </p>
             </div>

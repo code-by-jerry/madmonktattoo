@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,6 +10,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Theme variables (swaps automatically between light parchment & dark noir)
+        theme: {
+          bg: "var(--bg-main)",
+          surface: "var(--bg-surface)",
+          card: "var(--bg-card)",
+          elevated: "var(--bg-elevated)",
+          border: "var(--border-color)",
+          "border-subtle": "var(--border-subtle)",
+          "text-primary": "var(--text-primary)",
+          "text-secondary": "var(--text-secondary)",
+          "text-muted": "var(--text-muted)",
+        },
+        // Static brand palette tokens
         dark: {
           DEFAULT: "#0A0A0A",
           surface: "#121212",
