@@ -1,46 +1,32 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { siteConfig } from "@/data/site";
 import {
-  Upload,
-  X,
   CheckCircle2,
   AlertCircle,
   Loader2,
   MessageCircle,
 } from "lucide-react";
 
-// Form validation schema
+// Form validation schema - simplified and streamlined
 const clientBookingSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
   phone: z
     .string()
     .min(10, "Please enter a valid phone or WhatsApp number with at least 10 digits")
     .regex(/^[+0-9\s\-()]+$/, "Only numbers and valid phone characters allowed"),
-  tattooIdea: z
-    .string()
-    .min(10, "Please describe your tattoo idea in at least 10 characters"),
   placement: z.string().min(1, "Please select a body placement"),
-  size: z.string().min(1, "Please select an approximate size"),
-  style: z.string().min(1, "Please select a preferred tattoo style"),
-  sessionType: z.string().optional(),
   preferredStudio: z.string().optional(),
   preferredDate: z.string().optional(),
+  tattooIdea: z.string().optional(), // Now optional as requested
   website: z.string().max(0).optional(), // honeypot
 });
 
 type BookingFormData = z.infer<typeof clientBookingSchema>;
-
-interface ImagePreview {
-  name: string;
-  size: number;
-  type: string;
-  dataUrl: string;
-}
 
 const PLACEMENT_OPTIONS = [
   "Forearm (Inner/Outer)",
@@ -56,146 +42,50 @@ const PLACEMENT_OPTIONS = [
   "Other / Custom Placement",
 ];
 
-const SIZE_OPTIONS = [
-  "Small / Micro (Up to 2.5 × 2.5 inches)",
-  "Medium (Approx 4 × 5 inches)",
-  "Large (Approx 6 × 8 inches / Half-Sleeve)",
-  "Full Placement (Full Sleeve, Backplate, Chest)",
-  "Not sure yet (Need Joo's guidance)",
-];
-
-const STYLE_OPTIONS = [
-  "Blackwork (Solid black & heavy contrast)",
-  "Linework (Fine contours & anatomy flow)",
-  "Fine Line (Delicate single needle)",
-  "Geometric / Sacred Mandalas",
-  "Realism (High detail black & grey)",
-  "Cover-up (Rework existing tattoo)",
-  "Religious / Spiritual / Vedic Iconography",
-  "Small & Minimalist Sigil",
-  "Undecided / Open to Joo's recommendation",
-];
-
 const STUDIO_OPTIONS = [
   "Coimbatore Studio",
   "Palangarai, Avinashi Studio",
   "Either Location (Flexible)",
 ];
 
-const SESSION_TYPE_OPTIONS = [
-  "Small & Minimal",
-  "Half-Day",
-  "Full-Day",
-  "Not sure",
-];
-
 export default function BookingForm() {
-  const [images, setImages] = useState<ImagePreview[]>([]);
-  const [imageError, setImageError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [minDate, setMinDate] = useState<string>("");
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    // Avoid server/client timezone mismatch on hydration
+    setMinDate(new Date().toISOString().split("T")[0]);
+  }, []);
 
   const {
     register,
     handleSubmit,
     reset,
-    setValue,
     formState: { errors },
   } = useForm<BookingFormData>({
     resolver: zodResolver(clientBookingSchema),
     defaultValues: {
       fullName: "",
       phone: "",
-      tattooIdea: "",
       placement: "",
-      size: "",
-      style: "",
-      sessionType: "Not sure",
       preferredStudio: "Coimbatore Studio",
       preferredDate: "",
+      tattooIdea: "",
       website: "",
     },
   });
-
-  useEffect(() => {
-    // Avoid server/client timezone mismatch on hydration
-    setMinDate(new Date().toISOString().split("T")[0]);
-
-    // Pre-select session type when triggered from session cards
-    const handleSessionEvent = (e: Event) => {
-      const customEvent = e as CustomEvent<string>;
-      if (customEvent.detail) {
-        setValue("sessionType", customEvent.detail, { shouldValidate: true });
-      }
-    };
-    window.addEventListener("select-session-type", handleSessionEvent);
-    return () => window.removeEventListener("select-session-type", handleSessionEvent);
-  }, [setValue]);
-
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setImageError(null);
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-
-    if (images.length + files.length > 3) {
-      setImageError("You can upload a maximum of 3 reference images.");
-      return;
-    }
-
-    const newPreviews: ImagePreview[] = [];
-    const maxSizeBytes = 5 * 1024 * 1024; // 5MB
-
-    Array.from(files).forEach((file) => {
-      if (file.size > maxSizeBytes) {
-        setImageError(`File "${file.name}" exceeds 5MB size limit.`);
-        return;
-      }
-      if (!file.type.startsWith("image/")) {
-        setImageError(`File "${file.name}" is not a valid image format.`);
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        newPreviews.push({
-          name: file.name,
-          size: file.size,
-          type: file.type,
-          dataUrl: reader.result as string,
-        });
-
-        if (newPreviews.length === files.length) {
-          setImages((prev) => [...prev, ...newPreviews].slice(0, 3));
-        }
-      };
-      reader.readAsDataURL(file);
-    });
-
-    if (fileInputRef.current) fileInputRef.current.value = "";
-  };
-
-  const removeImage = (index: number) => {
-    setImages((prev) => prev.filter((_, i) => i !== index));
-    setImageError(null);
-  };
 
   const onSubmit = async (data: BookingFormData) => {
     setIsSubmitting(true);
     setSubmitError(null);
 
     try {
-      const payload = {
-        ...data,
-        referenceImages: images,
-      };
-
       const res = await fetch("/api/booking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(data),
       });
 
       const result = await res.json();
@@ -206,9 +96,11 @@ export default function BookingForm() {
 
       setIsSuccess(true);
       reset();
-      setImages([]);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Something went wrong. Please try again or WhatsApp us.";
+      const msg =
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again or WhatsApp us.";
       setSubmitError(msg);
     } finally {
       setIsSubmitting(false);
@@ -216,7 +108,10 @@ export default function BookingForm() {
   };
 
   return (
-    <section id="booking" className="py-24 relative bg-theme-bg border-t border-theme-border transition-colors duration-300">
+    <section
+      id="booking"
+      className="py-24 relative bg-theme-bg border-t border-theme-border transition-colors duration-300"
+    >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -227,7 +122,7 @@ export default function BookingForm() {
             Request A Custom Session
           </h2>
           <p className="mt-4 text-theme-text-secondary text-sm sm:text-base font-light tracking-wide max-w-xl mx-auto">
-            Fill in your concept details below. Joo reviews every inquiry personally and responds within 24 hours.
+            Fill in your details below. Joo reviews every inquiry personally and responds within 24 hours.
           </p>
         </div>
 
@@ -284,10 +179,14 @@ export default function BookingForm() {
               </div>
             )}
 
+            {/* Row 1: Full Name & Phone/WhatsApp */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Full Name */}
               <div>
-                <label htmlFor="fullName" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
+                <label
+                  htmlFor="fullName"
+                  className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2"
+                >
                   Full Name <span className="text-blood">*</span>
                 </label>
                 <input
@@ -309,7 +208,10 @@ export default function BookingForm() {
 
               {/* Phone / WhatsApp */}
               <div>
-                <label htmlFor="phone" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
+                <label
+                  htmlFor="phone"
+                  className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2"
+                >
                   Phone / WhatsApp <span className="text-blood">*</span>
                 </label>
                 <input
@@ -330,11 +232,14 @@ export default function BookingForm() {
               </div>
             </div>
 
-            {/* Select Row: Placement & Approximate Size */}
+            {/* Row 2: Body Placement & Studio Location */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Placement */}
               <div>
-                <label htmlFor="placement" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
+                <label
+                  htmlFor="placement"
+                  className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2"
+                >
                   Body Placement <span className="text-blood">*</span>
                 </label>
                 <select
@@ -346,7 +251,11 @@ export default function BookingForm() {
                 >
                   <option value="">Select body location</option>
                   {PLACEMENT_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt} className="bg-theme-bg text-theme-text-primary">
+                    <option
+                      key={opt}
+                      value={opt}
+                      className="bg-theme-bg text-theme-text-primary"
+                    >
                       {opt}
                     </option>
                   ))}
@@ -359,66 +268,12 @@ export default function BookingForm() {
                 )}
               </div>
 
-              {/* Size */}
+              {/* Studio Location */}
               <div>
-                <label htmlFor="size" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
-                  Approximate Size <span className="text-blood">*</span>
-                </label>
-                <select
-                  id="size"
-                  {...register("size")}
-                  className={`w-full px-4 py-3 bg-theme-bg border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors ${
-                    errors.size ? "border-blood" : "border-theme-border"
-                  }`}
+                <label
+                  htmlFor="preferredStudio"
+                  className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2"
                 >
-                  <option value="">Select target size</option>
-                  {SIZE_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt} className="bg-theme-bg text-theme-text-primary">
-                      {opt}
-                    </option>
-                  ))}
-                </select>
-                {errors.size && (
-                  <p className="mt-1.5 text-xs text-blood flex items-center space-x-1">
-                    <AlertCircle className="w-3 h-3 inline shrink-0" />
-                    <span>{errors.size.message}</span>
-                  </p>
-                )}
-              </div>
-            </div>
-
-            {/* Select Row: Style & Preferred Studio */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* Preferred Style */}
-              <div>
-                <label htmlFor="style" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
-                  Preferred Style <span className="text-blood">*</span>
-                </label>
-                <select
-                  id="style"
-                  {...register("style")}
-                  className={`w-full px-4 py-3 bg-theme-bg border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors ${
-                    errors.style ? "border-blood" : "border-theme-border"
-                  }`}
-                >
-                  <option value="">Select aesthetic style</option>
-                  {STYLE_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt} className="bg-theme-bg text-theme-text-primary">
-                      {opt}
-                    </option>
-                  ))}
-                </select>
-                {errors.style && (
-                  <p className="mt-1.5 text-xs text-blood flex items-center space-x-1">
-                    <AlertCircle className="w-3 h-3 inline shrink-0" />
-                    <span>{errors.style.message}</span>
-                  </p>
-                )}
-              </div>
-
-              {/* Preferred Studio Location */}
-              <div>
-                <label htmlFor="preferredStudio" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
                   Studio Location <span className="text-blood">*</span>
                 </label>
                 <select
@@ -427,7 +282,11 @@ export default function BookingForm() {
                   className="w-full px-4 py-3 bg-theme-bg border border-theme-border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors"
                 >
                   {STUDIO_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt} className="bg-theme-bg text-theme-text-primary">
+                    <option
+                      key={opt}
+                      value={opt}
+                      className="bg-theme-bg text-theme-text-primary"
+                    >
                       {opt}
                     </option>
                   ))}
@@ -435,138 +294,44 @@ export default function BookingForm() {
               </div>
             </div>
 
-            {/* Select Row: Session Type & Preferred Date */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* Target Session Type */}
-              <div>
-                <label htmlFor="sessionType" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
-                  Session Type
-                </label>
-                <select
-                  id="sessionType"
-                  {...register("sessionType")}
-                  className="w-full px-4 py-3 bg-theme-bg border border-theme-border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors"
-                >
-                  {SESSION_TYPE_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt} className="bg-theme-bg text-theme-text-primary">
-                      {opt}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Preferred Date */}
-              <div>
-                <label htmlFor="preferredDate" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
-                  Preferred Date (Optional)
-                </label>
-                <div className="relative">
-                  <input
-                    id="preferredDate"
-                    type="date"
-                    min={minDate || undefined}
-                    {...register("preferredDate")}
-                    className="w-full px-4 py-3 bg-theme-bg border border-theme-border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Tattoo Idea (Textarea) */}
+            {/* Row 3: Preferred Date (Optional) */}
             <div>
-              <label htmlFor="tattooIdea" className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
-                Tattoo Idea & Symbolism <span className="text-blood">*</span>
+              <label
+                htmlFor="preferredDate"
+                className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2"
+              >
+                Preferred Date (Optional)
+              </label>
+              <div className="relative">
+                <input
+                  id="preferredDate"
+                  type="date"
+                  min={minDate || undefined}
+                  {...register("preferredDate")}
+                  className="w-full px-4 py-3 bg-theme-bg border border-theme-border text-sm text-theme-text-primary focus:outline-none focus:border-blood transition-colors"
+                />
+              </div>
+            </div>
+
+            {/* Row 4: Tattoo Idea & Symbolism (Now Optional) */}
+            <div>
+              <label
+                htmlFor="tattooIdea"
+                className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2"
+              >
+                Tattoo Idea & Symbolism (Optional)
               </label>
               <textarea
                 id="tattooIdea"
                 rows={4}
                 placeholder="Describe your story, symbolism, reference elements, or if this is a cover-up..."
                 {...register("tattooIdea")}
-                className={`w-full px-4 py-3 bg-theme-bg border text-sm text-theme-text-primary placeholder:text-theme-text-muted focus:outline-none focus:border-blood resize-y transition-colors ${
-                  errors.tattooIdea ? "border-blood" : "border-theme-border"
-                }`}
+                className="w-full px-4 py-3 bg-theme-bg border border-theme-border text-sm text-theme-text-primary placeholder:text-theme-text-muted focus:outline-none focus:border-blood resize-y transition-colors"
               />
-              {errors.tattooIdea && (
-                <p className="mt-1.5 text-xs text-blood flex items-center space-x-1">
-                  <AlertCircle className="w-3 h-3 inline shrink-0" />
-                  <span>{errors.tattooIdea.message}</span>
-                </p>
-              )}
-            </div>
-
-            {/* Reference Image Upload (Up to 3 images, max 5MB each) */}
-            <div>
-              <label className="block text-xs uppercase font-mono tracking-wider text-theme-text-primary mb-2">
-                Reference Images (Up to 3 photos, Max 5MB each)
-              </label>
-
-              {images.length < 3 && (
-                <div
-                  onClick={() => fileInputRef.current?.click()}
-                  className="border border-dashed border-theme-border hover:border-blood p-6 text-center cursor-pointer transition-colors bg-theme-surface/50"
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => e.key === "Enter" && fileInputRef.current?.click()}
-                  aria-label="Upload reference images"
-                >
-                  <Upload className="w-6 h-6 text-blood mx-auto mb-2" />
-                  <p className="text-xs text-theme-text-primary font-medium">
-                    Click to browse or drop reference photos here
-                  </p>
-                  <p className="text-[11px] text-theme-text-muted mt-1 font-mono">
-                    JPEG, PNG, WebP up to 5MB each ({3 - images.length} remaining)
-                  </p>
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    multiple
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    className="hidden"
-                  />
-                </div>
-              )}
-
-              {imageError && (
-                <p className="mt-2 text-xs text-blood flex items-center space-x-1">
-                  <AlertCircle className="w-3 h-3 inline shrink-0" />
-                  <span>{imageError}</span>
-                </p>
-              )}
-
-              {/* Thumbnails preview */}
-              {images.length > 0 && (
-                <div className="mt-4 grid grid-cols-3 gap-3">
-                  {images.map((img, idx) => (
-                    <div
-                      key={idx}
-                      className="relative aspect-square border border-theme-border bg-theme-bg overflow-hidden group shadow-sm"
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={img.dataUrl}
-                        alt={`Reference thumbnail ${idx + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => removeImage(idx)}
-                        className="absolute top-1.5 right-1.5 p-1 bg-black/80 hover:bg-blood text-white transition-colors"
-                        aria-label={`Remove image ${idx + 1}`}
-                      >
-                        <X className="w-3.5 h-3.5" />
-                      </button>
-                      <span className="absolute bottom-1 left-1.5 text-[9px] font-mono text-white bg-black/70 px-1">
-                        {(img.size / 1024 / 1024).toFixed(1)} MB
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
 
             {/* Submit Button */}
-            <div className="pt-4">
+            <div className="pt-2">
               <button
                 type="submit"
                 disabled={isSubmitting}

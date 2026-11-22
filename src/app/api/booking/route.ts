@@ -8,16 +8,13 @@ const bookingSchema = z.object({
     .string()
     .min(10, "Phone/WhatsApp number must have at least 10 digits")
     .regex(/^[+0-9\s\-()]+$/, "Please enter a valid phone number"),
-  tattooIdea: z
-    .string()
-    .min(10, "Please describe your tattoo idea in at least 10 characters"),
   placement: z.string().min(1, "Please select a body placement"),
-  size: z.string().min(1, "Please select an approximate size"),
-  style: z.string().min(1, "Please select a preferred tattoo style"),
-  sessionType: z.string().optional(),
   preferredStudio: z.string().optional(),
   preferredDate: z.string().optional(),
-  // Reference images encoded as base64 or file metadata strings
+  tattooIdea: z.string().optional(),
+  size: z.string().optional(),
+  style: z.string().optional(),
+  sessionType: z.string().optional(),
   referenceImages: z
     .array(
       z.object({
@@ -29,7 +26,6 @@ const bookingSchema = z.object({
     )
     .max(3, "Maximum 3 reference images allowed")
     .optional(),
-  // Honeypot field for spam protection: must be empty
   website: z.string().max(0, "Bot detected").optional(),
 });
 
