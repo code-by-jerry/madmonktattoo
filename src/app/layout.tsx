@@ -121,7 +121,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${inter.variable} ${cinzel.variable} dark`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${cinzel.variable} light`} suppressHydrationWarning>
       <head>
         {/* Anti-flash script for instantaneous theme rendering */}
         <script
@@ -130,14 +130,14 @@ export default function RootLayout({
               (function() {
                 try {
                   var saved = localStorage.getItem('madmonk-theme');
-                  if (saved === 'light') {
-                    document.documentElement.classList.add('light');
-                    document.documentElement.classList.remove('dark');
-                    document.documentElement.style.colorScheme = 'light';
-                  } else {
+                  if (saved === 'dark') {
                     document.documentElement.classList.add('dark');
                     document.documentElement.classList.remove('light');
                     document.documentElement.style.colorScheme = 'dark';
+                  } else {
+                    document.documentElement.classList.add('light');
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.style.colorScheme = 'light';
                   }
                 } catch (e) {}
               })();
