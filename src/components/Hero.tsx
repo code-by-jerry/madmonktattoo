@@ -25,23 +25,11 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-        {/* "Now Booking" Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-blood/10 border border-blood/40 text-blood text-xs uppercase tracking-[0.25em] font-medium mb-8"
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-blood animate-ping" />
-          <span className="w-1.5 h-1.5 rounded-full bg-blood" />
-          <span>{siteConfig.brand.bookingBadge}</span>
-        </motion.div>
-
         {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
+          transition={{ duration: 0.7 }}
           className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-theme-text-primary leading-[1.08] max-w-4xl"
         >
           Your Story, <span className="text-blood italic">Inked.</span>
