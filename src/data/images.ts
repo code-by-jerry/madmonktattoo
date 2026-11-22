@@ -33,11 +33,11 @@ export const images = {
     height: 1536,
   },
   artist: {
-    src: "/placeholders/artist-portrait.svg",
-    alt: "Vikram 'Monk' Dev - Lead tattoo artist in his studio",
-    title: "Vikram 'Monk' Dev",
-    width: 800,
-    height: 1000,
+    src: "/images/artist.webp",
+    alt: "Lead Tattoo Artist at Mad Monk Tattoo Studio",
+    title: "Lead Resident Artist",
+    width: 1200,
+    height: 1600,
   },
   gallery: [
     {

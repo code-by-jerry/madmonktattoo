@@ -23,15 +23,15 @@ export default function Artist() {
               <div className="absolute -inset-4 border border-theme-border -rotate-1 pointer-events-none" />
               <div className="absolute -inset-4 border border-blood/30 rotate-1 pointer-events-none" />
 
-              <div className="relative aspect-[4/5] w-full overflow-hidden border border-theme-border bg-theme-card shadow-2xl">
+              <div className="relative aspect-[3/4] w-full overflow-hidden border border-theme-border bg-theme-card shadow-2xl">
                 <Image
                   src={images.artist.src}
                   alt={images.artist.alt}
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover filter contrast-125 grayscale"
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-75" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
                 {/* Badge Overlay */}
                 <div className="absolute bottom-6 left-6 right-6 p-4 bg-theme-card/95 backdrop-blur-sm border-l-2 border-blood shadow-lg">
